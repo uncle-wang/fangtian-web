@@ -31,11 +31,7 @@ $('#login_form').submit(function() {
 			},
 			success: function(data) {
 				if (data.status === 1000) {
-					showInfo('登录成功，即将自动跳转...');
-					turnToPage('index.html');
-				}
-				else if (data.status === 2004) {
-					showInfo('您已登录，即将自动为您跳转至首页...');
+					showInfo('登录成功，即将自动跳转至首页...');
 					turnToPage('index.html');
 				}
 				else if (data.status === 2005) {
