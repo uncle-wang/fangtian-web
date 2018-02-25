@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>首页</title>
+	</head>
+	<body>
+		<div id="main">
+			<ul>
+				<li v-for="order in orderList">
+					{{order.id}}&nbsp;{{order.initiator}}&nbsp;
+					<input type="button" value="响应" @click="responseOrder(order.id)">
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../lib/vue.js"></script>
+		<script type="text/javascript" src="../lib/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/main.js"></script>
+	</body>
+</html>
