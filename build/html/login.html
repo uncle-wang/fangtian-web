@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>登陆</title>
+		<style type="text/css">
+			div {
+				text-align: center;
+			}
+			span {
+				display: inline-block;
+				width: 68px;
+				text-align: right;
+				padding-right: 8px;
+			}
+			input {
+				width: 168px;
+				height: 24px;
+				border: 1px solid #000;
+				border-radius: 3px;
+				background-color: #fff;
+				padding: 0;
+				margin: 24px 0 0;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="login_form">
+			<div><span>用户名</span><input type="text" name="username"></div>
+			<div><span>密码</span><input type="password" name="password"></div>
+			<div><input type="submit" value="登陆"></div>
+		</form>
+		<script type="text/javascript" src="../lib/jquery.min.js"></script>
+		<script type="text/javascript">
+			$('#login_form').submit(function() {
+				var username = $('input[name="username"]').val();
+				var password = $('input[name="password"]').val();
+				if (username && password) {
+					$.ajax({
+						url: '/api/sign',
+						data: {
+							username: username,
+							password: password
+						},
+						success: function(data) {
+							if (data.status === 1000) {
+								window.location.href = 'index.html';
+							}
+							else if (data.desc) {
+								alert(data.desc);
+							}
+							else {
+								alert(data.status);
+							}
+						}
+					});
+				}
+				else {
+					alert('请输入用户名和密码');
+				}
+				return false;
+			});
+		</script>
+	</body>
+</html>

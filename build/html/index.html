@@ -10,9 +10,11 @@
 			<ul>
 				<li v-for="order in orderList">
 					{{order.id}}&nbsp;{{order.initiator}}&nbsp;
+					{{order.quota}}&nbsp;{{order.type}}
 					<input type="button" value="响应" @click="responseOrder(order.id)">
 				</li>
 			</ul>
+			<a class="create" href="create.html">创建订单</a>
 		</div>
 		<script type="text/javascript" src="../lib/vue.js"></script>
 		<script type="text/javascript" src="../lib/jquery.min.js"></script>
