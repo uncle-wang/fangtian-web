@@ -5,12 +5,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<link rel="stylesheet" type="text/css" href="../css/my.css">
+		<script type="text/javascript" src="../lib/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/my.js"></script>
 	</head>
 	<body>
 		<div class="my-card-wrap">
 			<div class="my-info-wrap">
-				<div class="my-info-icon">kw</div>
-				<div class="my-info-name">wj530206162</div>
+				<div class="my-info-icon signed">kw</div>
+				<div class="my-info-icon unsigned" id="icon_default"></div>
+				<div class="my-info-name signed">wj530206162</div>
+				<div class="my-info-name unsigned"><input id="login_btn" type="button" value="点击登录"></div>
 			</div>
 			<div class="my-pay-wrap">
 				<div class="my-pay-card">
@@ -59,9 +64,6 @@
 				</a>
 			</li>
 		</ul>
-		<div class="logout-wrap"><input id="logout_btn" class="logout-btn" type="button" value="退出登录"></input></div>
-		<script type="text/javascript" src="../lib/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/common.js"></script>
-		<script type="text/javascript" src="../js/my.js"></script>
+		<div class="logout-wrap signed"><input id="logout_btn" class="logout-btn" type="button" value="退出登录"></input></div>
 	</body>
 </html>

@@ -5,6 +5,9 @@
 body {
 	background-color: #eee;
 }
+.signed {
+	display: none;
+}
 .my-info-wrap {
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -23,11 +26,24 @@ body {
 	font-size: 30px;
 	margin: 0 auto;
 }
+.my-info-icon.unsigned {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(../image/login.png);
+	background-size: cover;
+}
 .my-info-name {
 	color: #fff;
 	font-size: 12px;
 	text-align: center;
 	margin-top: 8px;
+}
+#login_btn {
+	font-size: 12px;
+	color: #fff;
+	background: none;
+	border: none;
+	outline: none;
 }
 .my-pay-wrap {
 	margin-top: 8px;
