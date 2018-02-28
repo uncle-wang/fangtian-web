@@ -32,13 +32,18 @@
 			</style>\
 		</div>\
 	');
+	var loadingCount = 0;
 	var showLoading = function() {
 		$('body').css('overflow', 'hidden');
 		loading.show();
+		loadingCount ++;
 	};
 	var hideLoading = function() {
-		$('body').css('overflow', 'visible');
-		loading.hide();
+		loadingCount = Math.max(loadingCount - 1, 0);
+		if (loadingCount <= 0) {
+			$('body').css('overflow', 'visible');
+			loading.hide();
+		}
 	};
 
 	// 页脚
@@ -93,10 +98,30 @@
 
 	$('body').append(loading).append(footer);
 
-	exports.loading = {
-		show: showLoading,
-		hide: hideLoading
+	// ajax
+	var ajax = function(options) {
+
+		$.ajax({
+
+			url: options.url,
+			method: 'get',
+			dataType: 'json',
+			beforeSend: function() {
+				showLoading();
+			},
+			success: function(data) {
+				options.success(data);
+			},
+			error: function(err) {
+				console.log(err);
+			},
+			complete: function() {
+				hideLoading();
+			}
+		});
 	};
+
+	exports.ajax = ajax;
 
 	window.common = exports;
 }());

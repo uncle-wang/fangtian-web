@@ -1,0 +1,1 @@
+$("#logout_btn").click(function(){common.ajax({url:"/api/logout",success:function(o){1e3===o.status&&(window.location.href="index.html")}})}),common.ajax({url:"/api/getLoginStatus",success:function(o){console.log(o)}});
