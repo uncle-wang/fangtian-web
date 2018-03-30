@@ -41,7 +41,7 @@ $(document).ready(function() {
 					success: function(data) {
 						if (data.status === 1000) {
 							showInfo('注册成功，即将自动跳转...');
-							turnToPage('index.html');
+							turnToPage('login.html');
 						}
 						else if (data.status === 2001) {
 							showError('用户名已存在');

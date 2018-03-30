@@ -5,21 +5,37 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<link rel="stylesheet" type="text/css" href="../css/home.css">
+	</head>
+	<body>
+		<header></header>
+		<div class="game-box-wrap">
+			<div class="game-box odd">
+				<div class="game-wrap">
+					<div class="type">甲</div>
+					<div class="amount-wrap">
+						<div class="amount"></div>
+					</div>
+					<div class="buy-btn-wrap">
+						<a class="buy-btn">测试</a>
+					</div>
+				</div>
+			</div>
+			<div class="game-box even">
+				<div class="game-wrap">
+					<div class="type">乙</div>
+					<div class="amount-wrap">
+						<div class="amount"></div>
+					</div>
+					<div class="buy-btn-wrap">
+						<a class="buy-btn">测试</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="game-submit"><a class="submit">我要提交</a></div>
 		<script type="text/javascript" src="../lib/vue.js"></script>
 		<script type="text/javascript" src="../lib/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/common.js"></script>
 		<script type="text/javascript" src="../js/home.js"></script>
-	</head>
-	<body>
-		<div id="main">
-			<ul>
-				<li v-for="order in orderList">
-					{{order.id}}&nbsp;{{order.initiator}}&nbsp;
-					{{order.quota}}&nbsp;{{order.type}}
-					<input type="button" value="响应" @click="responseOrder(order.id)">
-				</li>
-			</ul>
-			<a class="create" href="create.html">创建订单</a>
-		</div>
 	</body>
 </html>

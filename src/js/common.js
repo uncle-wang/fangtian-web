@@ -1,5 +1,3 @@
-$(document).ready(function() {
-
 	var body = $('body');
 
 	var _loading = (function() {
@@ -117,6 +115,7 @@ $(document).ready(function() {
 
 			url: options.url,
 			method: 'get',
+			datas: options.datas || {},
 			dataType: 'json',
 			beforeSend: function() {
 				_loading.show();
@@ -138,4 +137,3 @@ $(document).ready(function() {
 		ajax: ajax,
 		footer: footer
 	};
-}); 
