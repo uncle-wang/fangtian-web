@@ -6,7 +6,8 @@ var watch = require('gulp-watch');
 
 var jsSrc = './src/js/*.js';
 var jsDst = './build/js/';
-var lessSrc = './src/less/*.less';
+var commonLess = './src/less/common.less';
+var lessSrc = ['./src/less/home.less', './src/less/login.less', './src/less/my.less', './src/less/register.less'];
 var cssDst  = './build/css/';
 
 // 编译less文件
@@ -18,10 +19,12 @@ gulp.task('compileLess', function() {
 		.pipe(cleancss())
 		.pipe(gulp.dest(cssDst));
 });
+
 // 监测less文件变化
 gulp.task('watchless', function() {
 
 	gulp.watch(lessSrc, ['compileLess']);
+	gulp.watch(commonLess, ['compileLess']);
 });
 
 // 压缩js文件
@@ -29,7 +32,7 @@ gulp.task('uglifyJs', function() {
 
 	gulp
 		.src(jsSrc)
-		.pipe(uglify())
+		// .pipe(uglify())
 		.pipe(gulp.dest(jsDst));
 });
 

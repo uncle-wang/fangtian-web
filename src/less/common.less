@@ -1,0 +1,78 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.layer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+#recharge_box, #payorder_box {
+	display: none;
+}
+.quota-box {
+	background: #fff;
+	position: fixed;
+	width: 300px;
+	border-radius: 3px;
+	left: 50%;
+	margin-left: -150px;
+	top: 30%;
+	overflow: hidden;
+	padding: 20px 0;
+}
+
+.quota-list {
+	overflow: hidden;
+	width: 272px;
+	margin-left: 10px;
+}
+
+.quota-item {
+	float: left;
+	border: 1px solid #0267b7;
+	width: 58px;
+	margin: 8px 0 0 8px;
+	color: #0267b7;
+	font-size: 13px;
+	text-align: center;
+	padding: 3px 0;
+	border-radius: 3px;
+
+	&.actived {
+		color: red;
+		border: 1px solid red;
+	}
+
+}
+
+.quota-fun {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.quota-btn {
+	display: inline-block;
+	font-size: 16px;
+	width: 108px;
+	text-align: center;
+	color: #fff;
+	padding: 5px 0;
+	border-radius: 3px;
+	background-color: #c1c1c1;
+	margin-left: 10px;
+
+	&.actived {
+		background-color: #ffa500;
+	}
+	&:first-child {
+		margin-left: 0;
+	}
+
+}

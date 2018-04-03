@@ -1,1 +1,61 @@
-$(document).ready(function(){var t=$(".error-text"),e=function(e){t.text(e).show()},n=$(".info-text");$("#register_form").submit(function(){var a=$('input[name="username"]').val(),i=$('input[name="password"]').val(),r=$('input[name="nickname"]').val(),s=$('input[name="password2"]').val();return t.text("").hide(),a&&i&&s&&r?i!==s?e("两次密码不一致"):$.ajax({url:"/api/register",data:{username:a,password:i,nickname:r},success:function(t){var a,i;1e3===t.status?(i="注册成功，即将自动跳转...",n.text(i).show(),a="login.html",setTimeout(function(){window.location.href=a},1e3)):2001===t.status?e("用户名已存在"):e("无法连接服务器，请稍后重试")}}):e("请填写空白项"),!1})});
+$(document).ready(function() {
+	// 错误信息
+	var errorText = $('.error-text');
+	var showError = function(text) {
+		errorText.text(text).show();
+	};
+	var hideError = function(text) {
+		errorText.text('').hide();
+	};
+	// 提示信息
+	var infoText = $('.info-text');
+	var showInfo = function(text) {
+		infoText.text(text).show();
+	};
+	// 页面跳转
+	var turnToPage = function(url) {
+		setTimeout(function() {
+			window.location.href = url;
+		}, 1000);
+	};
+
+	// 注册
+	$('#register_form').submit(function() {
+		var username = $('input[name="username"]').val();
+		var password = $('input[name="password"]').val();
+		var nickname = $('input[name="nickname"]').val();
+		var password2 = $('input[name="password2"]').val();
+		hideError();
+		if (username && password && password2 && nickname) {
+			if (password !== password2) {
+				showError('两次密码不一致');
+			}
+			else {
+				$.ajax({
+					url: '/api/register',
+					data: {
+						username: username,
+						password: password,
+						nickname: nickname
+					},
+					success: function(data) {
+						if (data.status === 1000) {
+							showInfo('注册成功，即将自动跳转...');
+							turnToPage('login.html');
+						}
+						else if (data.status === 2001) {
+							showError('用户名已存在');
+						}
+						else {
+							showError('无法连接服务器，请稍后重试');
+						}
+					}
+				});
+			}
+		}
+		else {
+			showError('请填写空白项');
+		}
+		return false;
+	});
+});

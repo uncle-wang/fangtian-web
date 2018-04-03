@@ -1,1 +1,52 @@
-$(document).ready(function(){var t=$(".error-text"),n=function(n){t.text(n).show()},e=$(".info-text");$("#login_form").submit(function(){var a=$('input[name="username"]').val(),o=$('input[name="password"]').val();return t.text("").hide(),a&&o?$.ajax({url:"/api/sign",data:{username:a,password:o},success:function(t){var a,o;1e3===t.status?(o="登录成功，即将自动跳转至首页...",e.text(o).show(),a="index.html",setTimeout(function(){window.location.href=a},1e3)):2005===t.status?n("用户名或密码错误"):n("无法连接服务器，请稍后重试")}}):n("请输入用户名和密码"),!1})});
+$(document).ready(function() {
+	// 错误信息
+	var errorText = $('.error-text');
+	var showError = function(text) {
+		errorText.text(text).show();
+	};
+	var hideError = function(text) {
+		errorText.text('').hide();
+	};
+	// 提示信息
+	var infoText = $('.info-text');
+	var showInfo = function(text) {
+		infoText.text(text).show();
+	};
+	// 页面跳转
+	var turnToPage = function(url) {
+		setTimeout(function() {
+			window.location.href = url;
+		}, 1000);
+	};
+	// 登录
+	$('#login_form').submit(function() {
+		var username = $('input[name="username"]').val();
+		var password = $('input[name="password"]').val();
+		hideError();
+		if (username && password) {
+			$.ajax({
+				url: '/api/sign',
+				data: {
+					username: username,
+					password: password
+				},
+				success: function(data) {
+					if (data.status === 1000) {
+						showInfo('登录成功，即将自动跳转至首页...');
+						turnToPage('index.html');
+					}
+					else if (data.status === 2005) {
+						showError('用户名或密码错误');
+					}
+					else {
+						showError('无法连接服务器，请稍后重试');
+					}
+				}
+			});
+		}
+		else {
+			showError('请输入用户名和密码');
+		}
+		return false;
+	});
+});
