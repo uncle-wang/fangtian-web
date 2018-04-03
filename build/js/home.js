@@ -29,6 +29,12 @@ $('#buy_odd').click(function() {
 		gameId: gameInfo.id
 	});
 });
+$('#buy_even').click(function() {
+	common.payorder.show({
+		type: 0,
+		gameId: gameInfo.id
+	});
+});
 
 common.recharge.init();
 common.payorder.init();

@@ -136,30 +136,39 @@
 	// 充值
 	var recharge = (function() {
 		var rechargeData = {};
-		var rechargeConfirm, rechargeCancel;
+		var rechargeConfirm, rechargeCancel, payForm;
 		var rechargeDom = $('\
 			<div id="recharge_box" class="layer">\
 				<div class="quota-box">\
 					<div class="quota-list">\
-						<a class="quota-item" value="100">100个</a>\
-						<a class="quota-item" value="300">300个</a>\
-						<a class="quota-item" value="1000">1000个</a>\
-						<a class="quota-item" value="2000">2000个</a>\
-						<a class="quota-item" value="5000">5000个</a>\
-						<a class="quota-item" value="10000">10000个</a>\
-						<a class="quota-item" value="20000">20000个</a>\
-						<a class="quota-item" value="50000">50000个</a>\
+						<a class="quota-item" value="1.00">100个</a>\
+						<a class="quota-item" value="3.00">300个</a>\
+						<a class="quota-item" value="10.00">1000个</a>\
+						<a class="quota-item" value="20.00">2000个</a>\
+						<a class="quota-item" value="50.00">5000个</a>\
+						<a class="quota-item" value="100.00">10000个</a>\
+						<a class="quota-item" value="200.00">20000个</a>\
+						<a class="quota-item" value="500.00">50000个</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="recharge_confirm" class="quota-btn">确定</a>\
 						<a id="recharge_cancel" class="quota-btn">取消</a>\
 					</div>\
+					<form id="payform" method="post" action="https://www.paypayzhu.com/api/pay">\
+						<input type="hidden" name="api_user" value="a7026c0e">\
+						<input type="hidden" name="type" value="2">\
+						<input type="hidden" name="redirect">\
+						<input type="hidden" name="price">\
+						<input type="hidden" name="order_id">\
+						<input type="hidden" name="order_info">\
+						<input type="hidden" name="signature">\
+						<input type="submit" class="quota-btn actived submit" value="去支付">\
+					</form>\
 				</div>\
 			</div>\
 		');
-		var show = function(callback) {
+		var show = function() {
 			rechargeDom.show();
-			rechargeData.callback = callback;
 		};
 		var hide = function() {
 			rechargeDom.hide();
@@ -170,33 +179,47 @@
 		return {
 			init: function() {
 				body.append(rechargeDom);
+				payForm = $('form#payform');
 				rechargeConfirm = $('#recharge_confirm');
 				rechargeCancel = $('#recharge_cancel');
+				// 初始化表单
+				payForm.find('input[name="redirect"]').val(window.location.href);
+				// 绑定事件
 				rechargeDom.click(function() {
 					hide();
 				});
 				rechargeCancel.click(function() {
 					hide();
 				});
-				rechargeConfirm.click(function() {
-					if (rechargeData.value) {
-						ajax({
-							url: '/api/recharge',
-							data: {
-								value: rechargeData.value
-							},
-							success: function(data) {
-								rechargeData.callback && rechargeData.callback(data);
-							}
-						});
-					}
-				});
 				rechargeDom.find('.quota-item').click(function() {
 					var _this = $(this);
-					rechargeData.value = _this.attr('value');
+					rechargeData.price = _this.attr('value');
 					rechargeDom.find('.quota-item').removeClass('actived');
 					rechargeConfirm.addClass('actived');
 					_this.addClass('actived');
+				});
+				rechargeConfirm.click(function() {
+					var price = rechargeData.price;
+					if (price) {
+						ajax({
+							url: '/api/getSignature',
+							data: {
+								redirect: payForm.find('input[name="redirect"]').val(),
+								price: price
+							},
+							success: function(data) {
+								console.log(data);
+								if (data.status === 1000) {
+									var payInfo = data.payInfo;
+									payForm.find('input[name="price"]').val(price);
+									payForm.find('input[name="order_id"]').val(payInfo.order_id);
+									payForm.find('input[name="order_info"]').val(payInfo.order_info);
+									payForm.find('input[name="signature"]').val(payInfo.signature);
+									payForm.show();
+								}
+							}
+						});
+					}
 				});
 				// 阻止向上冒泡
 				rechargeDom.find('.quota-box').click(function(e) {
@@ -216,16 +239,16 @@
 			<div id="payorder_box" class="layer">\
 				<div class="quota-box">\
 					<div class="quota-list">\
-						<a class="quota-item" value="50">50个</a>\
-						<a class="quota-item" value="100">100个</a>\
-						<a class="quota-item" value="200">200个</a>\
-						<a class="quota-item" value="500">500个</a>\
-						<a class="quota-item" value="1000">1000个</a>\
-						<a class="quota-item" value="2000">2000个</a>\
-						<a class="quota-item" value="5000">5000个</a>\
-						<a class="quota-item" value="10000">10000个</a>\
-						<a class="quota-item" value="20000">20000个</a>\
-						<a class="quota-item" value="50000">50000个</a>\
+						<!--a class="quota-item" value="50">50个</a-->\
+						<a class="quota-item" value="1">100个</a>\
+						<a class="quota-item" value="2">200个</a>\
+						<a class="quota-item" value="5">500个</a>\
+						<a class="quota-item" value="10">1000个</a>\
+						<a class="quota-item" value="20">2000个</a>\
+						<a class="quota-item" value="50">5000个</a>\
+						<a class="quota-item" value="100">10000个</a>\
+						<a class="quota-item" value="200">20000个</a>\
+						<a class="quota-item" value="500">50000个</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="payorder_confirm" class="quota-btn">确定</a>\
