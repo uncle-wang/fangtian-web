@@ -24,17 +24,18 @@ $('#recharge').click(function() {
 	});
 });
 $('#buy_odd').click(function() {
-	common.payorder.show({
+	common.orderbox.show({
 		type: 1,
 		gameId: gameInfo.id
 	});
 });
 $('#buy_even').click(function() {
-	common.payorder.show({
+	common.orderbox.show({
 		type: 0,
 		gameId: gameInfo.id
 	});
 });
 
 common.recharge.init();
-common.payorder.init();
+common.orderbox.init();
+common.payform.init();

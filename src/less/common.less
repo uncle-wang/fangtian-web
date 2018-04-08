@@ -13,17 +13,8 @@
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
-#recharge_box, #payorder_box {
+#recharge_box, #orderbox_box {
 	display: none;
-}
-#payform {
-	display: none;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	z-index: 2;
-	text-align: center;
 }
 .quota-box {
 	background: #fff;
@@ -79,13 +70,46 @@
 
 	&.actived {
 		background-color: #ffa500;
-		&.submit {
-			margin-left: 0;
-			margin-top: 80px;
-		}
 	}
 	&:first-child {
 		margin-left: 0;
 	}
+}
 
+#payform_box {
+	display: none;
+}
+
+.payform {
+	background-color: #fff;
+    width: 300px;
+    margin: 60% auto 0;
+    overflow: hidden;
+    padding: 22px 0 24px;
+    border-radius: 4px;
+}
+.pay-text {
+	text-align: center;
+    font-size: 18px;
+    color: #565656;
+}
+.pay-info {
+	text-align: center;
+    font-size: 13px;
+    margin-top: 6px;
+    color: #999;
+}
+#payform {
+	text-align: center;
+    margin-top: 18px;
+}
+.pay-submit {
+	width: 108px;
+    font-size: 16px;
+    background-color: #ff9800;
+    border-radius: 3px;
+    border: none;
+    color: #fff;
+    height: 33px;
+    outline: none;
 }

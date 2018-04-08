@@ -154,16 +154,6 @@
 						<a id="recharge_confirm" class="quota-btn">确定</a>\
 						<a id="recharge_cancel" class="quota-btn">取消</a>\
 					</div>\
-					<form id="payform" method="post" action="https://www.paypayzhu.com/api/pay">\
-						<input type="hidden" name="api_user" value="a7026c0e">\
-						<input type="hidden" name="type" value="2">\
-						<input type="hidden" name="redirect">\
-						<input type="hidden" name="price">\
-						<input type="hidden" name="order_id">\
-						<input type="hidden" name="order_info">\
-						<input type="hidden" name="signature">\
-						<input type="submit" class="quota-btn actived submit" value="去支付">\
-					</form>\
 				</div>\
 			</div>\
 		');
@@ -200,22 +190,25 @@
 				});
 				rechargeConfirm.click(function() {
 					var price = rechargeData.price;
+					var redirect = window.location.href;
 					if (price) {
 						ajax({
 							url: '/api/getSignature',
 							data: {
-								redirect: payForm.find('input[name="redirect"]').val(),
+								redirect: redirect,
 								price: price
 							},
 							success: function(data) {
-								console.log(data);
 								if (data.status === 1000) {
 									var payInfo = data.payInfo;
-									payForm.find('input[name="price"]').val(price);
-									payForm.find('input[name="order_id"]').val(payInfo.order_id);
-									payForm.find('input[name="order_info"]').val(payInfo.order_info);
-									payForm.find('input[name="signature"]').val(payInfo.signature);
-									payForm.show();
+									recharge.hide();
+									payform
+									.set('redirect', window.location.href)
+									.set('price', price)
+									.set('order_id', payInfo.order_id)
+									.set('order_info', payInfo.order_info)
+									.set('signature', payInfo.signature)
+									.show();
 								}
 							}
 						});
@@ -231,12 +224,66 @@
 		};
 	}());
 
+	// 充值支付
+	var payform = (function() {
+
+		var payformDom = $('\
+			<div id="payform_box" class="layer">\
+				<div class="payform">\
+					<div class="pay-text">\
+						订单创建成功，去支付吧！\
+					</div>\
+					<div class="pay-info">\
+						付款即时到账，支付遇到问题请联系我们\
+					</div>\
+					<form id="payform" method="post" action="https://www.paypayzhu.com/api/pay">\
+						<input type="hidden" name="api_user" value="a7026c0e">\
+						<input type="hidden" name="type" value="2">\
+						<input type="hidden" name="redirect">\
+						<input type="hidden" name="price">\
+						<input type="hidden" name="order_id">\
+						<input type="hidden" name="order_info">\
+						<input type="hidden" name="signature">\
+						<input type="submit" class="pay-submit" value="去支付">\
+					</form>\
+				</div>\
+			</div>\
+		');
+
+		return {
+			init: function() {
+				body.append(payformDom);
+				return this;
+			},
+			show: function() {
+				payformDom.show();
+				return this;
+			},
+			hide: function() {
+				payformDom.hide();
+				return this;
+			},
+			set: function(key, value) {
+				payformDom.find('input[name="' + key + '"]').val(value);
+				return this;
+			},
+			reset: function() {
+				payformDom.find('input[name="redirect"]').removeAttr('value');
+				payformDom.find('input[name="price"]').removeAttr('value');
+				payformDom.find('input[name="order_id"]').removeAttr('value');
+				payformDom.find('input[name="order_info"]').removeAttr('value');
+				payformDom.find('input[name="signature"]').removeAttr('value');
+				return this;
+			}
+		};
+	}());
+
 	// 下单
-	var payorder = (function() {
-		var payorderData = {};
-		var payorderConfirm, payorderCancel;
-		var payorderDom = $('\
-			<div id="payorder_box" class="layer">\
+	var orderbox = (function() {
+		var orderboxData = {};
+		var orderboxConfirm, orderboxCancel;
+		var orderboxDom = $('\
+			<div id="orderbox_box" class="layer">\
 				<div class="quota-box">\
 					<div class="quota-list">\
 						<!--a class="quota-item" value="50">50个</a-->\
@@ -251,59 +298,59 @@
 						<a class="quota-item" value="500">50000个</a>\
 					</div>\
 					<div class="quota-fun">\
-						<a id="payorder_confirm" class="quota-btn">确定</a>\
-						<a id="payorder_cancel" class="quota-btn">取消</a>\
+						<a id="orderbox_confirm" class="quota-btn">确定</a>\
+						<a id="orderbox_cancel" class="quota-btn">取消</a>\
 					</div>\
 				</div>\
 			</div>\
 		');
 		var show = function(options) {
-			payorderDom.show();
-			payorderData.type = options.type;
-			payorderData.gameId = options.gameId;
-			payorderData.callback = options.callback;
+			orderboxDom.show();
+			orderboxData.type = options.type;
+			orderboxData.gameId = options.gameId;
+			orderboxData.callback = options.callback;
 		};
 		var hide = function() {
-			payorderDom.hide();
-			payorderData = {};
-			payorderDom.find('.quota-item').removeClass('actived');
-			payorderConfirm.removeClass('actived');
+			orderboxDom.hide();
+			orderboxData = {};
+			orderboxDom.find('.quota-item').removeClass('actived');
+			orderboxConfirm.removeClass('actived');
 		};
 		return {
 			init: function() {
-				body.append(payorderDom);
-				payorderConfirm = $('#payorder_confirm');
-				payorderCancel = $('#payorder_cancel');
-				payorderDom.click(function() {
+				body.append(orderboxDom);
+				orderboxConfirm = $('#orderbox_confirm');
+				orderboxCancel = $('#orderbox_cancel');
+				orderboxDom.click(function() {
 					hide();
 				});
-				payorderCancel.click(function() {
+				orderboxCancel.click(function() {
 					hide();
 				});
-				payorderConfirm.click(function() {
-					if (payorderData.value) {
+				orderboxConfirm.click(function() {
+					if (orderboxData.value) {
 						ajax({
 							url: '/api/buyConfessed',
 							data: {
-								type: payorderData.type,
-								gameId: payorderData.gameId,
-								quota: payorderData.value
+								type: orderboxData.type,
+								gameId: orderboxData.gameId,
+								quota: orderboxData.value
 							},
 							success: function(data) {
-								payorderData.callback && payorderData.callback(data);
+								orderboxData.callback && orderboxData.callback(data);
 							}
 						});
 					}
 				});
-				payorderDom.find('.quota-item').click(function() {
+				orderboxDom.find('.quota-item').click(function() {
 					var _this = $(this);
-					payorderData.value = parseInt(_this.attr('value'));
-					payorderDom.find('.quota-item').removeClass('actived');
-					payorderConfirm.addClass('actived');
+					orderboxData.value = parseInt(_this.attr('value'));
+					orderboxDom.find('.quota-item').removeClass('actived');
+					orderboxConfirm.addClass('actived');
 					_this.addClass('actived');
 				});
 				// 阻止向上冒泡
-				payorderDom.find('.quota-box').click(function(e) {
+				orderboxDom.find('.quota-box').click(function(e) {
 					e.stopPropagation();
 				});
 			},
@@ -317,7 +364,8 @@
 		ajax: ajax,
 		footer: footer,
 		recharge: recharge,
-		payorder: payorder
+		orderbox: orderbox,
+		payform: payform
 	};
 
 }());
