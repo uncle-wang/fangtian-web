@@ -1,7 +1,7 @@
 var gameInfo;
 var initGameInfo = function() {
 
-	$('header').text(gameInfo.id);
+	$('header').text(gameInfo.id + '期');
 	var oddBox = $('.game-box.odd');
 	var evenBox = $('.game-box.even');
 	oddBox.find('.amount').text(gameInfo.odd_amount);

@@ -7,7 +7,7 @@ var watch = require('gulp-watch');
 var jsSrc = './src/js/*.js';
 var jsDst = './build/js/';
 var commonLess = './src/less/common.less';
-var lessSrc = ['./src/less/home.less', './src/less/login.less', './src/less/my.less', './src/less/register.less'];
+var lessSrc = ['./src/less/*.less', '!./src/less/common.less'];
 var cssDst  = './build/css/';
 
 // 编译less文件
