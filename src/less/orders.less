@@ -14,32 +14,84 @@ body {
 	border-bottom: 1px solid #e6e6e6;
 	margin-top: 16px;
 	padding-bottom: 8px;
+	padding-right: 72px;
+	position: relative;
 	&:last-child {
 		border-bottom: none;
 	}
 }
 
-.order-wrap {
-	float: left;
-	width: 33.33%;
-	margin-top: 8px;
-	text-align: center;
+.row {
+	margin-top: 10px;
+	&:first-child {
+		margin-top: 0;
+	}
 }
 
-.order-column {
-	font-size: 14px;
+.order-id {
+	font-size: 16px;
+    color: #000;
 }
 
-.order-text {
-	color: #9a9a9a;
-	font-size: 12px;
-	margin-top: 2px;
-	&.won {
-		font-weight: bold;
-		color: #4caf50;
-	}
-	&.fail {
-		font-weight: bold;
-		color: #ff0000;
-	}
+.order-time {
+	font-size: 13px;
+    color: #828282;
+    margin-left: 12px;
+}
+
+.order-type {
+	color: #ff5722;
+    display: inline-block;
+    border: 1px solid #ff5722;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.order-quota {
+	color: #ff9800;
+    margin-left: 12px;
+}
+
+.order-right {
+	position: absolute;
+    right: 0;
+    top: 0;
+    width: 72px;
+}
+
+.order-pay-text {
+	text-align: right;
+    color: #828282;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.order-btn {
+	background-color: orange;
+    color: #fff;
+    display: block;
+    text-align: center;
+    padding: 2px 0;
+    border-radius: 2px;
+    margin-top: 4px;
+}
+
+.pending, .won, .fail {
+	font-size: 16px;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.pending {
+	color: #ff9800;
+}
+
+.won {
+	color: #4caf50;
+}
+
+.fail {
+	color: #ff0000;
 }
