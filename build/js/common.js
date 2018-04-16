@@ -193,7 +193,7 @@
 					var redirect = window.location.href;
 					if (price) {
 						ajax({
-							url: '/api/getSignature',
+							url: '/api/createRecharge',
 							data: {
 								redirect: redirect,
 								price: price
@@ -249,13 +249,20 @@
 				</div>\
 			</div>\
 		');
+		var payText = payformDom.find('.pay-text');
 
 		return {
 			init: function() {
 				body.append(payformDom);
 				return this;
 			},
-			show: function() {
+			show: function(hideText) {
+				if (hideText) {
+					payText.hide();
+				}
+				else {
+					payText.show();
+				}
 				payformDom.show();
 				return this;
 			},
@@ -330,7 +337,7 @@
 				orderboxConfirm.click(function() {
 					if (orderboxData.value) {
 						ajax({
-							url: '/api/buyConfessed',
+							url: '/api/createOrder',
 							data: {
 								type: orderboxData.type,
 								gameId: orderboxData.gameId,
