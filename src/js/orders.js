@@ -12,17 +12,6 @@ var getOrderHistory = function() {
 	});
 };
 
-// 渲染数据
-var getOrderWrap = function(column, text, textClass) {
-
-	var className = textClass ? ' ' + textClass : '';
-	return $('\
-		<div class="order-wrap">\
-			<div class="order-column">' + column + '</div>\
-			<div class="order-text' + className + '">' + text + '</div>\
-		</div>\
-	');
-};
 var getTypeStr = function(type) {
 
 	var arr = ['乙', '甲'];
@@ -79,12 +68,6 @@ var initOrderData = function(orderList) {
 			else {
 				$orderRight.html('<div class="fail">失败</div>');
 			}
-		}
-		else if (orderStatus === '0') {
-			$orderRight.html('\
-				<div class="order-pay-text">等待支付</div>\
-				<a class="order-btn">支付</a>\
-			');
 		}
 		else {
 			$orderRight.html('<div class="pending">等待开奖</div>');
