@@ -125,10 +125,11 @@
 				options.success(data);
 			},
 			error: function(err) {
-				console.log(err);
+				options.error && options.error();
 			},
 			complete: function() {
 				_loading.hide();
+				options.complete && options.complete();
 			}
 		});
 	};
@@ -141,14 +142,14 @@
 			<div id="recharge_box" class="layer">\
 				<div class="quota-box">\
 					<div class="quota-list">\
-						<a class="quota-item" value="1.00">100个</a>\
-						<a class="quota-item" value="3.00">300个</a>\
-						<a class="quota-item" value="10.00">1000个</a>\
-						<a class="quota-item" value="20.00">2000个</a>\
-						<a class="quota-item" value="50.00">5000个</a>\
-						<a class="quota-item" value="100.00">10000个</a>\
-						<a class="quota-item" value="200.00">20000个</a>\
-						<a class="quota-item" value="500.00">50000个</a>\
+						<a class="quota-item" value="1.00">100豆</a>\
+						<a class="quota-item" value="3.00">300豆</a>\
+						<a class="quota-item" value="10.00">1000豆</a>\
+						<a class="quota-item" value="20.00">2000豆</a>\
+						<a class="quota-item" value="50.00">5000豆</a>\
+						<a class="quota-item" value="100.00">10000豆</a>\
+						<a class="quota-item" value="200.00">20000豆</a>\
+						<a class="quota-item" value="500.00">50000豆</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="recharge_confirm" class="quota-btn">确定</a>\
@@ -293,16 +294,16 @@
 			<div id="orderbox_box" class="layer">\
 				<div class="quota-box">\
 					<div class="quota-list">\
-						<!--a class="quota-item" value="50">50个</a-->\
-						<a class="quota-item" value="1">100个</a>\
-						<a class="quota-item" value="2">200个</a>\
-						<a class="quota-item" value="5">500个</a>\
-						<a class="quota-item" value="10">1000个</a>\
-						<a class="quota-item" value="20">2000个</a>\
-						<a class="quota-item" value="50">5000个</a>\
-						<a class="quota-item" value="100">10000个</a>\
-						<a class="quota-item" value="200">20000个</a>\
-						<a class="quota-item" value="500">50000个</a>\
+						<!--a class="quota-item" value="50">50豆</a-->\
+						<a class="quota-item" value="1">100豆</a>\
+						<a class="quota-item" value="2">200豆</a>\
+						<a class="quota-item" value="5">500豆</a>\
+						<a class="quota-item" value="10">1000豆</a>\
+						<a class="quota-item" value="20">2000豆</a>\
+						<a class="quota-item" value="50">5000豆</a>\
+						<a class="quota-item" value="100">10000豆</a>\
+						<a class="quota-item" value="200">20000豆</a>\
+						<a class="quota-item" value="500">50000豆</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="orderbox_confirm" class="quota-btn">确定</a>\
