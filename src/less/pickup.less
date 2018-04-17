@@ -1,0 +1,59 @@
+@import 'common';
+
+body {
+	padding-bottom: 16px;
+}
+
+.pickup-list {
+	padding: 0 16px;
+	overflow: hidden;
+}
+
+.pickup-item {
+	overflow: hidden;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 16px 72px 16px 0;
+	position: relative;
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.pickup-time {
+	font-size: 13px;
+    color: #828282;
+}
+
+.pickup-amount {
+	color: #ff9800;
+	margin-top: 4px;
+}
+
+.pickup-right {
+	position: absolute;
+    right: 0;
+    top: 0;
+    width: 72px;
+}
+
+.pickup-btn {
+	background-color: orange;
+    color: #fff;
+    display: block;
+    text-align: center;
+    padding: 2px 0;
+    border-radius: 2px;
+    margin-top: 23px;
+}
+
+.complete, .pending {
+	font-size: 16px;
+    margin-top: 26px;
+    text-align: right;
+}
+.complete {
+	color: #4caf50;
+}
+.pending {
+	color: #ff9800;
+}
