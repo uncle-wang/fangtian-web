@@ -31,7 +31,7 @@ $(document).ready(function() {
 				showError('两次密码不一致');
 			}
 			else {
-				$.ajax({
+				common.ajax({
 					url: '/api/register',
 					data: {
 						username: username,

@@ -19,36 +19,37 @@ $(document).ready(function() {
 		}, 1000);
 	};
 
-	// 注册
-	$('#register_form').submit(function() {
-		var username = $('input[name="username"]').val();
-		var password = $('input[name="password"]').val();
-		var nickname = $('input[name="nickname"]').val();
+	// 修改密码
+	$('#password_form').submit(function() {
+		var oldpassword = $('input[name="oldpassword"]').val();
+		var newpassword = $('input[name="newpassword"]').val();
 		var password2 = $('input[name="password2"]').val();
 		hideError();
-		if (username && password && password2 && nickname) {
-			if (password !== password2) {
+		if (oldpassword && newpassword && password2) {
+			if (newpassword !== password2) {
 				showError('两次密码不一致');
 			}
 			else {
 				common.ajax({
-					url: '/api/register',
+					url: '/api/updatePassword',
 					data: {
-						username: username,
-						password: password,
-						nickname: nickname
+						oldpassword: oldpassword,
+						newpassword: newpassword,
 					},
 					success: function(data) {
 						if (data.status === 1000) {
-							showInfo('注册成功，即将自动跳转...');
+							showInfo('修改密码成功，即将自动跳转...');
 							turnToPage('login.html');
 						}
-						else if (data.status === 2001) {
-							showError('用户名已存在');
+						else if (data.status === 2005) {
+							showError('密码不正确');
 						}
 						else {
-							showError('无法连接服务器，请稍后重试');
+							showError('数据异常，请稍后重试');
 						}
+					},
+					error: function() {
+						showError('无法连接服务器，请检查您的网络或稍后重试');
 					}
 				});
 			}
