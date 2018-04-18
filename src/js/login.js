@@ -7,17 +7,6 @@ $(document).ready(function() {
 	var hideError = function(text) {
 		errorText.text('').hide();
 	};
-	// 提示信息
-	var infoText = $('.info-text');
-	var showInfo = function(text) {
-		infoText.text(text).show();
-	};
-	// 页面跳转
-	var turnToPage = function(url) {
-		setTimeout(function() {
-			window.location.href = url;
-		}, 1000);
-	};
 	// 登录
 	$('#login_form').submit(function() {
 		var username = $('input[name="username"]').val();
@@ -32,8 +21,7 @@ $(document).ready(function() {
 				},
 				success: function(data) {
 					if (data.status === 1000) {
-						showInfo('登录成功，即将自动跳转至首页...');
-						turnToPage('index.html');
+						window.location.href = 'index.html';
 					}
 					else if (data.status === 2005) {
 						showError('用户名或密码错误');

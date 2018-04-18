@@ -1,12 +1,13 @@
+var percentPoint = 6;
 var userInfo;
 // 计算提现最大值
 var getMaxPickupValue = function() {
 	var balance = userInfo.balance;
 	if (balance > 0) {
-		var baseValue = Math.floor(balance * 95 / 100);
+		var baseValue = Math.floor(balance * (100 - percentPoint) / 100);
 		var lastV = baseValue;
 		for (var i = baseValue; i <= balance; i ++) {
-			if (i + Math.ceil(i * 5 / 100) <= balance) {
+			if (i + Math.ceil(i * percentPoint / 100) <= balance) {
 				lastV = i;
 			}
 			else {
@@ -40,7 +41,7 @@ $('#logout_btn').click(function() {
 		url: '/api/logout',
 		success: function(data) {
 			if (data.status === 1000) {
-				window.location.href = window.location.href;
+				window.location.href = 'index.html';
 			}
 		}
 	});
@@ -76,8 +77,8 @@ $('#pickup_submit').click(function() {
 				alert('提现数额不能小于100');
 			}
 			else {
-				if (quota + Math.ceil(quota * 5 / 100) > userInfo.balance) {
-					alert('余额不足');
+				if (quota + Math.ceil(quota * percentPoint / 100) > userInfo.balance) {
+					alert('余额不足，若您的余额有变动，可刷新页面获取最新余额');
 				}
 				else {
 					common.ajax({
@@ -87,11 +88,10 @@ $('#pickup_submit').click(function() {
 						},
 						success: function(data) {
 							if (data.status === 1000) {
-								userInfo.balance = data.newBalance;
-								$('#balance_text').text('余豆: ' + userInfo.balance);
+								window.location.href = 'pickup.html';
 							}
 							else if (data.status === 2003) {
-								alert('余额不足，请刷新页面获取最新余额数据');
+								alert('余额不足，请刷新页面获取最新余额');
 							}
 							else {
 								alert('服务异常，请尝试刷新页面或重新登录');
