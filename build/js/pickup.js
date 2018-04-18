@@ -39,7 +39,10 @@ var initPickupData = function(pickupList) {
 			<li class="pickup-item">\
 				<div class="pickup-left">\
 					<div class="pickup-time">' + formatTime(pickupInfo.create_time) + '</div>\
-					<div class="pickup-amount">' + pickupInfo.quota + '豆</div>\
+					<div class="pickup-row">\
+						<span class="pickup-amount">金额:' + pickupInfo.quota + '豆</span>\
+						<span class="pickup-fees">手续费:' + pickupInfo.fees + '豆</span>\
+					</div>\
 				</div>\
 				<div class="pickup-right"></div>\
 			</li>\
