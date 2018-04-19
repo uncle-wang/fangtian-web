@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+body {
+	font-family: Arial;
+}
+
 .layer {
 	position: fixed;
 	bottom: 0;
@@ -25,7 +29,7 @@
 	margin-left: -150px;
 	top: 30%;
 	overflow: hidden;
-	padding: 20px 0;
+	padding: 12px 0 20px;
 }
 
 .quota-list {
@@ -36,18 +40,18 @@
 
 .quota-item {
 	float: left;
-	border: 1px solid #0267b7;
+	border: 1px solid #c1c1c1;
 	width: 58px;
 	margin: 8px 0 0 8px;
-	color: #0267b7;
+	color: #000;
 	font-size: 13px;
 	text-align: center;
 	padding: 3px 0;
 	border-radius: 3px;
 
 	&.actived {
-		color: red;
-		border: 1px solid red;
+		color: #009688;
+		border: 1px solid #009688;
 	}
 
 }
@@ -69,7 +73,7 @@
 	margin-left: 10px;
 
 	&.actived {
-		background-color: #ffa500;
+		background-color: #009688;
 	}
 	&:first-child {
 		margin-left: 0;
@@ -95,6 +99,8 @@
     color: #565656;
 }
 .pay-info {
+	width: 260px;
+	margin: 0 auto;
 	text-align: center;
     font-size: 13px;
     color: #999;
@@ -106,7 +112,7 @@
 .pay-submit {
 	width: 108px;
     font-size: 16px;
-    background-color: #ff9800;
+    background-color: #009688;
     border-radius: 3px;
     border: none;
     color: #fff;

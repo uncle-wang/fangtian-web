@@ -2,63 +2,6 @@
 
 	var body = $('body');
 
-	// 页脚
-	var footer = (function() {
-		var footerWrap = $('\
-			<footer class="footer">\
-				<a class="footer-link" href="my.html">\
-					<div class="footer-link-item">\
-						<div class="footer-icon"></div>\
-						<div class="footer-text">快速充值</div>\
-					</div>\
-				</a>\
-				<a class="footer-link" href="my.html">\
-					<div class="footer-link-item">\
-						<div class="footer-icon"></div>\
-						<div class="footer-text">我的订单</div>\
-					</div>\
-				</a>\
-				<a class="footer-link" href="my.html">\
-					<div class="footer-link-item">\
-						<div class="footer-icon"></div>\
-						<div class="footer-text">个人中心</div>\
-					</div>\
-				</a>\
-				<style>\
-					.footer {\
-						position: fixed;\
-						width: 100%;\
-						bottom: 0;\
-						left: 0;\
-						background-color: #ff5000;\
-						height: 64px;\
-						overflow: hidden;\
-					}\
-					.footer .footer-link {\
-						outline: none;\
-						text-decoration: none;\
-						display: block;\
-						width: 33.3333%;\
-						height: 100%;\
-						float: left;\
-					}\
-					.footer .footer-link-item {\
-						margin-top: 21px;\
-					}\
-					.footer .footer-text {\
-						color: #fff;\
-						text-align: center;\
-					}\
-				</style>\
-			</footer>\
-		');
-		return {
-			init: function() {
-				body.append(footerWrap);
-			}
-		};
-	}());
-
 	// ajax
 	// loading
 	var _loading = (function() {
@@ -82,7 +25,7 @@
 					.loading-wrap .loading-text {\
 						top: 45%;\
 						z-index: 999;\
-						color: #ff5000;\
+						color: #009688;\
 						text-align: center;\
 						position: fixed;\
 						width: 100%;\
@@ -240,7 +183,7 @@
 						订单创建成功，去支付吧！\
 					</div>\
 					<div class="pay-info">\
-						付款即时到账，支付遇到问题请联系我们\
+						付款即时到账，支付遇到问题请在<br>个人中心>问题反馈 联系我们\
 					</div>\
 					<form id="payform" method="post" action="https://www.paypayzhu.com/api/pay">\
 						<input type="hidden" name="api_user" value="a7026c0e">\
@@ -375,7 +318,6 @@
 	window.common = {
 
 		ajax: ajax,
-		footer: footer,
 		recharge: recharge,
 		orderbox: orderbox,
 		payform: payform
