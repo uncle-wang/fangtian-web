@@ -125,7 +125,12 @@
 				options.success(data);
 			},
 			error: function(err) {
-				options.error && options.error();
+				if (options.error) {
+					options.error();
+				}
+				else {
+					alert('请求失败，请检查您的网络或稍后重试');
+				}
 			},
 			complete: function() {
 				_loading.hide();

@@ -8,6 +8,12 @@ var getOrderHistory = function() {
 			if (data.status === 1000) {
 				initOrderData(data.orderList);
 			}
+			else if (data.status === 1001) {
+				window.location.href = 'login.html?redirect=orders.html';
+			}
+			else {
+				alert('数据异常，请稍后重试');
+			}
 		}
 	});
 };

@@ -8,6 +8,12 @@ var getRechargeHistory = function() {
 			if (data.status === 1000) {
 				initRechargeData(data.rechargeList);
 			}
+			else if (data.status === 1001) {
+				window.location.href = 'login.html?redirect=recharge.html';
+			}
+			else {
+				alert('数据异常，请稍后重试');
+			}
 		}
 	});
 };

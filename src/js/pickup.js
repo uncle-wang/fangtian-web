@@ -8,6 +8,12 @@ var getPickupHistory = function() {
 			if (data.status === 1000) {
 				initPickupData(data.pickupList);
 			}
+			else if (data.status === 1001) {
+				window.location.href = 'login.html?redirect=pickup.html';
+			}
+			else {
+				alert('数据异常，请稍后重试');
+			}
 		}
 	});
 };

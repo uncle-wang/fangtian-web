@@ -21,6 +21,11 @@ var getMaxPickupValue = function() {
 		return;
 	}
 };
+// 跳转登录页
+var toLoginPage = function(url) {
+	var redirect = 'login.html?redirect=' + (url ? url : 'my.html');
+	window.location.href = redirect;
+};
 // 加载登录信息
 common.ajax({
 	url: '/api/getUserInfo',
@@ -47,7 +52,12 @@ $('#logout_btn').click(function() {
 	});
 });
 $('#recharge_btn').click(function() {
-	common.recharge.show();
+	if (userInfo) {
+		common.recharge.show();
+	}
+	else {
+		toLoginPage();
+	}
 });
 $('#pickup_btn').click(function() {
 	if (userInfo) {
@@ -55,11 +65,11 @@ $('#pickup_btn').click(function() {
 		$('#pickup_amount').val('').focus();
 	}
 	else {
-		window.location.href = 'login.html';
+		toLoginPage();
 	}
 });
 $('#login_btn, .my-info-icon.unsigned').click(function() {
-	window.location.href = 'login.html?returnurl=' + encodeURIComponent('my.html');
+	toLoginPage();
 });
 $('#pickup_all').click(function() {
 	getMaxPickupValue();
@@ -117,6 +127,16 @@ $('#pickup_wrap').click(function() {
 });
 $('.pickup-box').click(function(e) {
 	e.stopPropagation();
+});
+$('a.func-item-link').click(function() {
+	if (userInfo) {
+		return true;
+	}
+	else {
+		var redirect = $(this).attr('href');
+		toLoginPage(redirect);
+		return false;
+	}
 });
 common.recharge.init();
 common.payform.init();
