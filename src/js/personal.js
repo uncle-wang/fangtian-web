@@ -23,7 +23,7 @@ var getMaxPickupValue = function() {
 };
 // 跳转登录页
 var toLoginPage = function(url) {
-	var redirect = 'login.html?redirect=' + (url ? url : 'personal.html');
+	var redirect = 'login.html?info=' + encodeURIComponent('请先登录') + '&redirect=' + (url ? url : 'personal.html');
 	window.location.href = redirect;
 };
 // 加载登录信息

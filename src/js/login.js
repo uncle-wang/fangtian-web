@@ -6,16 +6,16 @@ var showError = function(text) {
 var hideError = function(text) {
 	errorText.text('').hide();
 };
-// 取redirect参数
-var getRedirect = function() {
+// 取参数
+var getParam = function(name) {
 	var search = window.location.search;
 	if (search.length > 1) {
 		search = search.substr(1);
 		var arr = search.split('&');
 		for (var i = 0; i < arr.length; i ++) {
 			var pair = arr[i];
-			if (pair.indexOf('redirect=') === 0) {
-				var v = pair.substr(9);
+			if (pair.indexOf(name + '=') === 0) {
+				var v = pair.substr(name.length + 1);
 				if (v.length > 0) {
 					return v;
 				}
@@ -38,7 +38,7 @@ $('#login_form').submit(function() {
 			},
 			success: function(data) {
 				if (data.status === 1000) {
-					var redirectUrl = getRedirect();
+					var redirectUrl = getParam('redirect');
 					if (redirectUrl) {
 						window.location.href = redirectUrl;
 					}
@@ -60,3 +60,9 @@ $('#login_form').submit(function() {
 	}
 	return false;
 });
+
+// 获取info信息
+var textInfo = getParam('info');
+if (textInfo) {
+	showError(decodeURIComponent(textInfo));
+}

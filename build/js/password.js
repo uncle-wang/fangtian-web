@@ -44,6 +44,9 @@ $(document).ready(function() {
 						else if (data.status === 2005) {
 							showError('密码不正确');
 						}
+						else if (data.status === 1001) {
+							window.location.href = 'login.html?redirect=password.html&info=' + encodeURIComponent('请先登录');
+						}
 						else {
 							showError('数据异常，请稍后重试');
 						}
