@@ -6,7 +6,6 @@ var getGamesHistory = function() {
 		url: '/api/getConfessedHistory',
 		success: function(data) {
 			if (data.status === 1000) {
-				data.gameList[1] = data.gameList[0];
 				initGamesData(data.gameList);
 			}
 			else {

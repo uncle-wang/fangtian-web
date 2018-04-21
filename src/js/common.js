@@ -243,15 +243,15 @@
 				<div class="quota-box">\
 					<div class="quota-list">\
 						<!--a class="quota-item" value="50">50豆</a-->\
-						<a class="quota-item" value="1">100豆</a>\
-						<a class="quota-item" value="2">200豆</a>\
-						<a class="quota-item" value="5">500豆</a>\
-						<a class="quota-item" value="10">1000豆</a>\
-						<a class="quota-item" value="20">2000豆</a>\
-						<a class="quota-item" value="50">5000豆</a>\
-						<a class="quota-item" value="100">10000豆</a>\
-						<a class="quota-item" value="200">20000豆</a>\
-						<a class="quota-item" value="500">50000豆</a>\
+						<a class="quota-item" value="100">100豆</a>\
+						<a class="quota-item" value="200">200豆</a>\
+						<a class="quota-item" value="500">500豆</a>\
+						<a class="quota-item" value="1000">1000豆</a>\
+						<a class="quota-item" value="2000">2000豆</a>\
+						<a class="quota-item" value="5000">5000豆</a>\
+						<a class="quota-item" value="10000">10000豆</a>\
+						<a class="quota-item" value="20000">20000豆</a>\
+						<a class="quota-item" value="50000">50000豆</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="orderbox_confirm" class="quota-btn">确定</a>\
