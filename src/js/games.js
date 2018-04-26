@@ -17,7 +17,7 @@ var getGamesHistory = function() {
 
 var getResult = function(result) {
 
-	var arr = ['双', '单'];
+	var arr = ['双', '单', '和'];
 	return arr[result];
 };
 var zeroFixed = function(n) {
@@ -46,8 +46,7 @@ var initGamesData = function(gameList) {
 		var oddAmount = gameInfo.odd_amount;
 		var evenAmount = gameInfo.even_amount;
 		var closeTime = gameInfo.close_time;
-		var oddTimes = gameInfo.odd_times;
-		var evenTimes = gameInfo.even_times;
+		var times = gameInfo.times;
 		var result = gameInfo.result;
 		var resultNumber = gameInfo.result_no;
 		var $gameItem = $('\
@@ -60,12 +59,10 @@ var initGamesData = function(gameList) {
 					<div class="row odd-info">\
 						<span class="game-type">单</span>\
 						<span class="game-quota">总额:' + oddAmount + '豆</span>\
-						<span class="game-times">赔率:' + oddTimes + '</span>\
 					</div>\
 					<div class="row even-info">\
 						<span class="game-type">双</span>\
 						<span class="game-quota">总额:' + evenAmount + '豆</span>\
-						<span class="game-times">赔率:' + evenTimes + '</span>\
 					</div>\
 				</div>\
 				<div class="game-right">\
@@ -74,6 +71,13 @@ var initGamesData = function(gameList) {
 				</div>\
 			</li>\
 		');
+		var $gameTimes = $('<span class="game-times">赔率:' + times + '</span>');
+		if (result === 0 || result === 2) {
+			$gameItem.find('.even-info').append($gameTimes);
+		}
+		if (result === 1 || result === 2) {
+			$gameItem.find('.odd-info').append($gameTimes);
+		}
 		$gameList.append($gameItem);
 	}
 };
