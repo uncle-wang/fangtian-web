@@ -106,7 +106,20 @@ body {
 	font-size: 16px;
 	height: 100%;
 	line-height: 58px;
+	position: relative;
 }
+#protection_link .func-item-title:after {
+	content: '尽快设置，防止密码丢失!';
+	position: absolute;
+	font-size: 12px;
+	color: red;
+	right: 0;
+}
+#protection_link .func-item-title.set:after {
+	content: '已设置';
+	color: #009688;
+}
+
 .logout-wrap {
 	margin-top: 24px;
 	padding: 0 16px;

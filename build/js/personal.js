@@ -37,6 +37,16 @@ common.ajax({
 			$('#balance_text').text('余豆: ' + userInfo.balance);
 			$('.unsigned').hide();
 			$('.signed').show();
+			var $protectLink = $('#protection_link');
+			var $protectTitle = $protectLink.find('.func-item-title');
+			if (userInfo.protection) {
+				$protectLink.attr('href', 'protection.html?type=1');
+				$protectTitle.addClass('set');
+			}
+			else {
+				$protectLink.attr('href', 'protection.html?type=0');
+				$protectTitle.removeClass('set');
+			}
 		}
 	}
 });

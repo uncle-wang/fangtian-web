@@ -7,28 +7,61 @@
 		<link rel="stylesheet" type="text/css" href="../css/protection.css">
 	</head>
 	<body>
-		<div class="wrap">
-			<div class="protect-title">请设置密保问题及答案</div>
-			<form id="protect_form">
+		<div class="wrap" id="old_protection">
+			<div class="protect-title">请输入旧密保问题的答案</div>
+			<form id="old_protect_form">
 				<div class="line">
-					<div class="label">问题一</div>
-					<div class="input-wrap"><input class="input" type="text" name="ques_a"></div>
-					<div class="label">答案一</div>
-					<div class="input-wrap"><input class="input" type="text" name="answ_a"></div>
+					<div class="label">问题1</div>
+					<div class="ques-text"></div>
+					<div class="label">答案1</div>
+					<div class="input-wrap"><input class="input" type="text" name="old_answ_a"></div>
 				</div>
 				<div class="line">
-					<div class="label">问题二</div>
-					<div class="input-wrap"><input class="input" type="text" name="ques_b"></div>
-					<div class="label">答案二</div>
-					<div class="input-wrap"><input class="input" type="text" name="answ_b"></div>
+					<div class="label">问题2</div>
+					<div class="ques-text"></div>
+					<div class="label">答案2</div>
+					<div class="input-wrap"><input class="input" type="text" name="old_answ_b"></div>
 				</div>
 				<div class="line">
-					<div class="label">问题三</div>
-					<div class="input-wrap"><input class="input" type="text" name="ques_c"></div>
-					<div class="label">答案三</div>
-					<div class="input-wrap"><input class="input" type="text" name="answ_c"></div>
+					<div class="label">问题3</div>
+					<div class="ques-text"></div>
+					<div class="label">答案3</div>
+					<div class="input-wrap"><input class="input" type="text" name="old_answ_c"></div>
 				</div>
-				<input class="submit-btn" type="submit" value="确认设置">
+				<input class="submit-btn" type="submit" value="下一步">
+			</form>
+		</div>
+		<div class="wrap" id="new_protection">
+			<div class="protect-title">请设置新的密保问题和答案</div>
+			<form id="new_protect_form">
+				<div class="line">
+					<div class="label">问题1</div>
+					<div class="input-wrap"><input class="input" type="text" name="new_ques_a"></div>
+					<div class="label">答案1</div>
+					<div class="input-wrap"><input class="input" type="text" name="new_answ_a"></div>
+				</div>
+				<div class="line">
+					<div class="label">问题2</div>
+					<div class="input-wrap"><input class="input" type="text" name="new_ques_b"></div>
+					<div class="label">答案2</div>
+					<div class="input-wrap"><input class="input" type="text" name="new_answ_b"></div>
+				</div>
+				<div class="line">
+					<div class="label">问题3</div>
+					<div class="input-wrap"><input class="input" type="text" name="new_ques_c"></div>
+					<div class="label">答案3</div>
+					<div class="input-wrap"><input class="input" type="text" name="new_answ_c"></div>
+				</div>
+				<input class="submit-btn" type="submit" value="下一步">
+			</form>
+		</div>
+		<div class="wrap" id="password">
+			<div class="protect-title">请输入登录密码</div>
+			<form id="password_form">
+				<div class="line">
+					<div class="input-wrap"><input class="input" type="password" name="password"></div>
+				</div>
+				<input class="submit-btn" type="submit" value="确定设置">
 			</form>
 		</div>
 		<script type="text/javascript" src="../lib/jquery.min.js"></script>
