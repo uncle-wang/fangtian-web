@@ -46,8 +46,21 @@ $('#login_form').submit(function() {
 						window.location.href = 'index.html';
 					}
 				}
+				else if (data.status === 2002) {
+					showError('用户名或密码错误');
+				}
 				else if (data.status === 2005) {
 					showError('用户名或密码错误');
+					var wrongTimes = data.wrongTimes;
+					if (wrongTimes >= 5) {
+						showError('密码错误，当前账号由于密码错误次数过多已经被锁定，请使用找回密码功能进行重置');
+					}
+					else if (wrongTimes > 2) {
+						showError('密码错误，连续输错5次密码账号将被锁定，当前已错误' + wrongTimes + '次');
+					}
+				}
+				else if (data.status === 2009) {
+					showError('您的账号已被锁定，请使用找回密码功能重置');
 				}
 				else {
 					showError('无法连接服务器，请稍后重试');
