@@ -48,7 +48,9 @@ var initOrderData = function(orderList) {
 	var $orderList = $('.order-list');
 	for (var i = 0; i < orderList.length; i ++) {
 		var orderInfo = orderList[i];
+		var orderAmount = orderInfo.amount;
 		var orderStatus = orderInfo.status;
+		var orderTimes = orderInfo.times;
 		var orderType = orderInfo.type;
 		var $orderItem = $('\
 			<li class="order-item">\
@@ -59,13 +61,15 @@ var initOrderData = function(orderList) {
 					</div>\
 					<div class="row">\
 						<span class="order-type">' + getTypeStr(orderType) + '</span>\
-						<span class="order-quota">' + orderInfo.amount + '豆</span>\
+						<span class="order-quota">' + orderAmount + '豆</span>\
+						<span class="order-won"></span>\
 					</div>\
 				</div>\
 				<div class="order-right"></div>\
 			</li>\
 		');
 		var $orderRight = $orderItem.find('.order-right');
+		var $orderWon = $orderItem.find('.order-won');
 		if (orderStatus === '1') {
 			var orderResult = orderInfo.result;
 			if (orderResult === 2) {
@@ -73,6 +77,7 @@ var initOrderData = function(orderList) {
 			}
 			else if (orderResult === orderType) {
 				$orderRight.html('<div class="won">胜利</div>');
+				$orderWon.html('x' + orderTimes + '&nbsp;&nbsp;&nbsp;&nbsp;赢取' + orderTimes * orderAmount + '豆').show();
 			}
 			else {
 				$orderRight.html('<div class="fail">失败</div>');

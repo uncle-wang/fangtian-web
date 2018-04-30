@@ -38,6 +38,7 @@ var initGameInfo = function() {
 	var status = gameInfo.status;
 	var odd = gameInfo.odd_amount;
 	var even = gameInfo.even_amount;
+	var result = gameInfo.result;
 	var total = 0.9 * odd + 0.9 * even;
 	var pOdd, pEven;
 	if (odd === 0 && even === 0) {
@@ -56,8 +57,20 @@ var initGameInfo = function() {
 		pOdd = (Math.floor(100 * total / odd) / 100).toFixed(2);
 		pEven = (Math.floor(100 * total / even) / 100).toFixed(2);
 	}
+	// 已开奖
+	if (status === '1') {
+		var resultInfo;
+		if (result === 2) {
+			resultInfo = '当期游戏结束，因为存在单项投注总额为0的情况，所有投注订单的赔率为0.9';
+		}
+		else {
+			resultInfo = '当期游戏结束，开奖结果为' + gameInfo.result_no + '，投注' + (result === 0 ? '双' : '单') + '号的玩家获胜，当期赔率:' + gameInfo.times.toFixed(2);
+		}
+		$('#result').show().text(resultInfo);
+		$('#next_time').show();
+	}
 	// 已封盘
-	if (status === '2' || Date.now() >= gameInfo.disable_time) {
+	else if (status === '2' || Date.now() >= gameInfo.disable_time) {
 		$('#close_time').show().text('投注已截止，开奖结果将在' + formatTime(gameInfo.close_time) + '前公布');
 	}
 	// 接受下注
@@ -90,7 +103,7 @@ var orderSuccess = function(data) {
 };
 // 获取游戏信息
 common.ajax({
-	url: '/api/getOpenConfessedGame',
+	url: '/api/getLatestConfessedGame',
 	success: function(data) {
 		if (data.status === 1000) {
 			gameInfo = data.gameInfo;
@@ -104,9 +117,7 @@ common.ajax({
 
 $('#recharge').click(function() {
 	if (userInfo) {
-		common.recharge.show(function(data) {
-			console.log(data);
-		});
+		common.recharge.show();
 	}
 	else {
 		window.location.href = 'login.html?redirect=index.html';
