@@ -20,7 +20,7 @@ var getOrderHistory = function() {
 
 var getTypeStr = function(type) {
 
-	var arr = ['乙', '甲'];
+	var arr = ['双', '单'];
 	if (type === null) {
 		return '等待结果';
 	}
@@ -68,7 +68,10 @@ var initOrderData = function(orderList) {
 		var $orderRight = $orderItem.find('.order-right');
 		if (orderStatus === '1') {
 			var orderResult = orderInfo.result;
-			if (orderResult === orderType) {
+			if (orderResult === 2) {
+				$orderRight.html('<div class="draw">无效局</div>');
+			}
+			else if (orderResult === orderType) {
 				$orderRight.html('<div class="won">胜利</div>');
 			}
 			else {

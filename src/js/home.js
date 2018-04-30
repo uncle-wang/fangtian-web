@@ -22,19 +22,13 @@ var zeroFixed = function(n) {
 	}
 	return n;
 };
-var formatTime = function(stamp, timeonly) {
+var formatTime = function(stamp) {
 	var d = new Date(stamp);
-	var year = d.getFullYear();
 	var month = d.getMonth() + 1;
 	var date = d.getDate();
 	var hour = d.getHours();
 	var minute = d.getMinutes();
-	if (timeonly) {
-		return zeroFixed(hour) + ':' + zeroFixed(minute);
-	}
-	else {
-		return '' + year + '-' + zeroFixed(month) + '-' + zeroFixed(date) + ' ' + zeroFixed(hour) + ':' + zeroFixed(minute);
-	}
+	return '' + zeroFixed(month) + '-' + zeroFixed(date) + ' ' + zeroFixed(hour) + ':' + zeroFixed(minute);
 };
 var initGameInfo = function() {
 
@@ -46,27 +40,53 @@ var initGameInfo = function() {
 	var even = gameInfo.even_amount;
 	var total = 0.9 * odd + 0.9 * even;
 	var pOdd, pEven;
-	if (odd === 0 || even === 0) {
+	if (odd === 0 && even === 0) {
 		pOdd = 0;
+		pEven = 0;
+	}
+	else if (odd === 0) {
+		pOdd = 0;
+		pEven = 0.9;
+	}
+	else if (even === 0) {
+		pOdd = 0.9;
 		pEven = 0;
 	}
 	else {
 		pOdd = (Math.floor(100 * total / odd) / 100).toFixed(2);
 		pEven = (Math.floor(100 * total / even) / 100).toFixed(2);
 	}
+	// 已封盘
+	if (status === '2' || Date.now() >= gameInfo.disable_time) {
+		$('#close_time').show().text('投注已截止，开奖结果将在' + formatTime(gameInfo.close_time) + '前公布');
+	}
 	// 接受下注
-	if (status === '0') {
+	else if (status === '0') {
 		$('.buy-btn-wrap').show();
 		$('#disable_time').show().text('投注时间截止至' + formatTime(gameInfo.disable_time));
-	}
-	// 已封盘
-	if (status === '2') {
-		$('#close_time').show().text('投注已截止，开奖结果将在' + formatTime(gameInfo.close_time, true) + '前公布');
 	}
 	oddBox.find('.amount').text(odd);
 	evenBox.find('.amount').text(even);
 	oddBox.find('.probability').text('赔率: ' + pOdd);
 	evenBox.find('.probability').text('赔率: ' + pEven);
+};
+var orderSuccess = function(data) {
+
+	var status = data.status;
+	common.orderbox.hide();
+	if (status === 1000) {
+		alert('投注成功，您可到个人中心-历史订单中查看订单状态');
+		window.location.href = window.location.href;
+	}
+	else if (status === 2003) {
+		alert('对不起，您的余额不足，请充值后重新下单');
+	}
+	else if (status === 4002) {
+		alert('对不起，您来晚了，该局游戏已经不再接受投注');
+	}
+	else {
+		alert('对不起，数据异常，请您稍后重试');
+	}
 };
 // 获取游戏信息
 common.ajax({
@@ -95,13 +115,15 @@ $('#recharge').click(function() {
 $('#buy_odd').click(function() {
 	common.orderbox.show({
 		type: 1,
-		gameId: gameInfo.id
+		gameId: gameInfo.id,
+		callback: orderSuccess
 	});
 });
 $('#buy_even').click(function() {
 	common.orderbox.show({
 		type: 0,
-		gameId: gameInfo.id
+		gameId: gameInfo.id,
+		callback: orderSuccess
 	});
 });
 

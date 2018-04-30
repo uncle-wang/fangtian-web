@@ -17,7 +17,7 @@ var getGamesHistory = function() {
 
 var getResult = function(result) {
 
-	var arr = ['双', '单', '和'];
+	var arr = ['双', '单', '无效局'];
 	return arr[result];
 };
 var zeroFixed = function(n) {
@@ -71,12 +71,11 @@ var initGamesData = function(gameList) {
 				</div>\
 			</li>\
 		');
-		var $gameTimes = $('<span class="game-times">赔率:' + times + '</span>');
 		if (result === 0 || result === 2) {
-			$gameItem.find('.even-info').append($gameTimes);
+			$gameItem.find('.even-info').append($('<span class="game-times">赔率:' + times + '</span>'));
 		}
 		if (result === 1 || result === 2) {
-			$gameItem.find('.odd-info').append($gameTimes);
+			$gameItem.find('.odd-info').append($('<span class="game-times">赔率:' + times + '</span>'));
 		}
 		$gameList.append($gameItem);
 	}
