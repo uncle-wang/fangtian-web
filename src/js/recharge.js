@@ -6,7 +6,11 @@ var getRechargeHistory = function() {
 		url: '/api/getRechargeHistory',
 		success: function(data) {
 			if (data.status === 1000) {
-				initRechargeData(data.rechargeList);
+				var rechargeList = data.rechargeList;
+				if (rechargeList.length > 0) {
+					$('.empty-info').hide();
+					initRechargeData(rechargeList);
+				}
 			}
 			else if (data.status === 1001) {
 				window.location.href = 'login.html?redirect=recharge.html';

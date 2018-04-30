@@ -6,7 +6,11 @@ var getGamesHistory = function() {
 		url: '/api/getConfessedHistory',
 		success: function(data) {
 			if (data.status === 1000) {
-				initGamesData(data.gameList);
+				var gameList = data.gameList;
+				if (gameList.length > 0) {
+					$('.empty-info').hide();
+					initGamesData(gameList);
+				}
 			}
 			else {
 				alert('数据异常，请稍后重试');

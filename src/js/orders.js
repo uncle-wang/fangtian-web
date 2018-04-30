@@ -6,7 +6,11 @@ var getOrderHistory = function() {
 		url: '/api/getOrderHistory',
 		success: function(data) {
 			if (data.status === 1000) {
-				initOrderData(data.orderList);
+				var orderList = data.orderList;
+				if (orderList.length > 0) {
+					$('.empty-info').hide();
+					initOrderData(orderList);
+				}
 			}
 			else if (data.status === 1001) {
 				window.location.href = 'login.html?redirect=orders.html';

@@ -6,7 +6,11 @@ var getPickupHistory = function() {
 		url: '/api/getPickupHistory',
 		success: function(data) {
 			if (data.status === 1000) {
-				initPickupData(data.pickupList);
+				var pickupList = data.pickupList;
+				if (pickupList.length > 0) {
+					$('.empty-info').hide();
+					initPickupData(pickupList);
+				}
 			}
 			else if (data.status === 1001) {
 				window.location.href = 'login.html?redirect=pickup.html';

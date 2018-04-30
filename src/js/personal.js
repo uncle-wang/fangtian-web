@@ -108,7 +108,8 @@ $('#pickup_submit').click(function() {
 						},
 						success: function(data) {
 							if (data.status === 1000) {
-								window.location.href = 'pickup.html';
+								alert('提现成功，系统将在1个工作日内处理您的提现请求，您可以在提现记录中查看提现状态');
+								window.location.href = window.location.href;
 							}
 							else if (data.status === 2003) {
 								alert('余额不足，请刷新页面获取最新余额');
