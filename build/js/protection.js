@@ -59,7 +59,6 @@ var setProtection = function() {
 		url: '/api/setProtection',
 		data: {
 			type: pType,
-			password: _getValue('password'),
 			old_answ_a: _getValue('old_answ_a'),
 			old_answ_b: _getValue('old_answ_b'),
 			old_answ_c: _getValue('old_answ_c'),
@@ -77,12 +76,8 @@ var setProtection = function() {
 				alert('密保设置成功');
 				window.location.href = 'personal.html';
 			}
-			else if (status === 2005) {
-				alert('登录密码错误，请重新输入');
-			}
 			else if (status === 2006) {
 				alert('原密保问题验证失败，请检查您的答案');
-				$('#password').hide();
 				$('#new_protection').hide();
 				$('#old_protection').show();
 			}
@@ -96,9 +91,7 @@ var setProtection = function() {
 // 初始化
 var init = function() {
 
-	var submitBtn = $('#new_protect_form input[type="submit"]');
 	if (pType === '1') {
-		submitBtn.attr('value', '确 定');
 		getQuestions(function(quesList) {
 			initQuestionList(quesList);
 			$('#old_protection').show();
@@ -106,7 +99,6 @@ var init = function() {
 	}
 	else if (pType === '0') {
 		$('#new_protection').show();
-		submitBtn.attr('value', '下一步');
 	}
 	else {
 		alert('type参数异常');
@@ -163,34 +155,13 @@ $('#new_protect_form').submit(function() {
 
 	var validStatus = newProtValid();
 	if (validStatus === 1) {
-		if (pType === '0') {
-			$('#new_protection').hide();
-			$('#password').show();
-		}
-		else if (pType === '1') {
-			setProtection();
-		}
-		else {
-			alert('type参数异常');
-		}
+		setProtection();
 	}
 	else if (validStatus === 2) {
 		alert('选项内容不能超过16个字符，请检查您的输入');
 	}
 	else {
 		alert('选项不能为空');
-	}
-	return false;
-});
-
-$('#password_form').submit(function() {
-
-	var p = $('#password input[type="password"]').val();
-	if (p.length <= 0) {
-		alert('请输入密码');
-	}
-	else {
-		setProtection();
 	}
 	return false;
 });
