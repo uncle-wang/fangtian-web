@@ -54,7 +54,7 @@ var initOrderData = function(orderList) {
 		var orderInfo = orderList[i];
 		var orderAmount = orderInfo.amount;
 		var orderStatus = orderInfo.status;
-		var orderTimes = orderInfo.times;
+		var orderTimes = orderInfo.times.toFixed(2);
 		var orderType = orderInfo.type;
 		var $orderItem = $('\
 			<li class="order-item">\
@@ -81,7 +81,7 @@ var initOrderData = function(orderList) {
 			}
 			else if (orderResult === orderType) {
 				$orderRight.html('<div class="won">胜利</div>');
-				$orderWon.html('x' + orderTimes + '&nbsp;&nbsp;&nbsp;&nbsp;赢取' + orderTimes * orderAmount + '豆').show();
+				$orderWon.html('x' + orderTimes + '&nbsp;&nbsp;赢取' + orderTimes * orderAmount + '豆').show();
 			}
 			else {
 				$orderRight.html('<div class="fail">失败</div>');
