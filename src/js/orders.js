@@ -54,7 +54,6 @@ var initOrderData = function(orderList) {
 		var orderInfo = orderList[i];
 		var orderAmount = orderInfo.amount;
 		var orderStatus = orderInfo.status;
-		var orderTimes = orderInfo.times.toFixed(2);
 		var orderType = orderInfo.type;
 		var $orderItem = $('\
 			<li class="order-item">\
@@ -76,12 +75,15 @@ var initOrderData = function(orderList) {
 		var $orderWon = $orderItem.find('.order-won');
 		if (orderStatus === '1') {
 			var orderResult = orderInfo.result;
+			var orderTimes = orderInfo.times.toFixed(2);
+			var winText = 'x' + orderTimes + '&nbsp;&nbsp;赢取' + orderTimes * orderAmount + '豆';
 			if (orderResult === 2) {
 				$orderRight.html('<div class="draw">无效局</div>');
+				$orderWon.html(winText).show();
 			}
 			else if (orderResult === orderType) {
 				$orderRight.html('<div class="won">胜利</div>');
-				$orderWon.html('x' + orderTimes + '&nbsp;&nbsp;赢取' + orderTimes * orderAmount + '豆').show();
+				$orderWon.html(winText).show();
 			}
 			else {
 				$orderRight.html('<div class="fail">失败</div>');
