@@ -19,11 +19,6 @@ var getGamesHistory = function() {
 	});
 };
 
-var getResult = function(result) {
-
-	var arr = ['双', '单', '无效局'];
-	return arr[result];
-};
 var zeroFixed = function(n) {
 
 	if (Number(n) < 10) {
@@ -50,7 +45,7 @@ var initGamesData = function(gameList) {
 		var oddAmount = gameInfo.odd_amount;
 		var evenAmount = gameInfo.even_amount;
 		var closeTime = gameInfo.close_time;
-		var times = gameInfo.times;
+		var times = gameInfo.times.toFixed(2);
 		var result = gameInfo.result;
 		var resultNumber = gameInfo.result_no;
 		var $gameItem = $('\
@@ -69,17 +64,29 @@ var initGamesData = function(gameList) {
 						<span class="game-quota">总额:' + evenAmount + '豆</span>\
 					</div>\
 				</div>\
-				<div class="game-right">\
-					<div class="game-result-number">' + resultNumber + '</div>\
-					<div class="game-result">' + getResult(result) + '</div>\
-				</div>\
+				<div class="game-right"></div>\
 			</li>\
 		');
-		if (result === 0 || result === 2) {
-			$gameItem.find('.even-info').append($('<span class="game-times">赔率:' + times + '</span>'));
+		var $gameRight = $gameItem.find('.game-right');
+		var $gameEven = $gameItem.find('.even-info');
+		var $gameOdd = $gameItem.find('.odd-info');
+		if (result === 2) {
+			$gameRight.append($('<div class="game-result">无效局</div>'));
+			$gameEven.append($('<span class="game-times">赔率:' + times + '</span>'));
+			$gameOdd.append($('<span class="game-times">赔率:' + times + '</span>'));
 		}
-		if (result === 1 || result === 2) {
-			$gameItem.find('.odd-info').append($('<span class="game-times">赔率:' + times + '</span>'));
+		else {
+			var $gameWin = $('<span class="game-win">胜</span>');
+			var $gameTimes = $('<span class="game-times">赔率:' + times + '</span>');
+			$gameRight.append($('<div class="game-result-number">' + resultNumber + '</div>'));
+			if (result === 0) {
+				$gameEven.append($gameTimes);
+				$gameEven.append($gameWin);
+			}
+			if (result === 1) {
+				$gameOdd.append($gameTimes);
+				$gameOdd.append($gameWin);
+			}
 		}
 		$gameList.append($gameItem);
 	}
