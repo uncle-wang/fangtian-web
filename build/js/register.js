@@ -40,8 +40,9 @@ $(document).ready(function() {
 					},
 					success: function(data) {
 						if (data.status === 1000) {
+							var newUserInfo = '为了保证您的账号安全，请您登录后尽快到 个人中心-密码保护 中设置密码保护';
 							showInfo('注册成功，即将自动跳转...');
-							turnToPage('login.html');
+							turnToPage('login.html?info=' + encodeURIComponent(newUserInfo));
 						}
 						else if (data.status === 2001) {
 							showError('用户名已存在');

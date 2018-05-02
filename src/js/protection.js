@@ -97,7 +97,7 @@ var init = function() {
 		});
 	}
 	else if (pType === '0') {
-		$('#new_protection').show();
+		$('#info_wrap').show();
 	}
 	else {
 		alert('type参数异常');
@@ -135,6 +135,10 @@ var oldProtValid = function() {
 	return 1;
 };
 
+$('#info_wrap .submit-btn').click(function() {
+	$('#info_wrap').hide();
+	$('#new_protection').show();
+});
 $('#old_protect_form').submit(function() {
 	var validStatus = oldProtValid();
 	if (validStatus === 1) {
