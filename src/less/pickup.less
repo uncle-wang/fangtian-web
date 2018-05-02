@@ -12,7 +12,7 @@ body {
 .pickup-item {
 	overflow: hidden;
 	border-bottom: 1px solid #e6e6e6;
-	padding: 16px 64px 16px 0;
+	padding: 16px 80px 16px 0;
 	position: relative;
 	&:last-child {
 		border-bottom: none;
@@ -42,7 +42,7 @@ body {
 	position: absolute;
     right: 0;
     top: 0;
-    width: 64px;
+    width: 80px;
 }
 
 .pickup-btn {
@@ -55,7 +55,7 @@ body {
     margin-top: 23px;
 }
 
-.complete, .pending {
+.complete, .pending, .cancel {
 	font-size: 14px;
     margin-top: 28px;
     text-align: right;
@@ -63,8 +63,12 @@ body {
 .complete {
 	color: #009688;
 }
-.pending {
+.pending, .cancel {
 	color: #828282;
+}
+.cancel-btn {
+	color: red;
+	margin-left: 6px;
 }
 
 .back-wrap {

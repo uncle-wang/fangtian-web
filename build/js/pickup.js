@@ -1,4 +1,4 @@
-// 获取充值记录
+// 获取提现记录
 var getPickupHistory = function() {
 
 	common.ajax({
@@ -20,6 +20,30 @@ var getPickupHistory = function() {
 			}
 		}
 	});
+};
+// 取消提现订单
+var cancelPickup = function(id) {
+
+	if (confirm('确定取消本次提现操作？')) {
+		common.ajax({
+			url: '/api/cancelPickup',
+			data: {id: id},
+			success: function(data) {
+				var status = data.status;
+				if (status === 1000) {
+					alert('取消成功，金额已经返还至您的账户');
+					window.location.href = window.location.href;
+				}
+				else if (status === 3003) {
+					alert('订单状态发生改变，请刷新页面后重试');
+				}
+				else {
+					alert('数据异常，请刷新页面或稍后重试');
+				}
+			}
+		});
+		console.log(id);
+	}
 };
 
 var zeroFixed = function(n) {
@@ -61,11 +85,18 @@ var initPickupData = function(pickupList) {
 		if (pickupStatus === '1') {
 			$pickupRight.html('<div class="complete">已完成</div>');
 		}
+		else if (pickupStatus === '2') {
+			$pickupRight.html('<div class="cancel">已取消</div>');
+		}
 		else {
-			$pickupRight.html('<div class="pending">待处理</div>');
+			$pickupRight.html('<div class="pending">待处理<a class="cancel-btn" oid="' + pickupInfo.id + '">取消</a></div>');
 		}
 		$pickupList.append($pickupItem);
 	}
+	$('.cancel-btn').click(function() {
+		var pickupId = $(this).attr('oid');
+		cancelPickup(pickupId);
+	});
 };
 
 getPickupHistory();
