@@ -41,19 +41,16 @@ $(document).ready(function() {
 							showInfo('修改密码成功，即将自动跳转...');
 							turnToPage('login.html');
 						}
-						else if (data.status === 2002) {
-							showError('用户名或密码错误');
-						}
 						else if (data.status === 2005) {
 							var wrongTimes = data.wrongTimes;
 							if (wrongTimes >= 5) {
-								showError('密码错误，当前账号由于密码错误次数过多已经被锁定，请使用找回密码功能进行重置');
+								showError('原密码错误，当前账号由于密码错误次数过多已经被锁定，请使用找回密码功能进行重置');
 							}
 							else if (wrongTimes > 2) {
-								showError('密码错误，连续输错5次密码账号将被锁定，当前已错误' + wrongTimes + '次');
+								showError('原密码错误，连续输错5次密码账号将被锁定，当前已错误' + wrongTimes + '次');
 							}
 							else {
-								showError('用户名或密码错误');
+								showError('原密码错误');
 							}
 						}
 						else if (data.status === 2009) {

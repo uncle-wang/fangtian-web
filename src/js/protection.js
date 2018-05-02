@@ -44,7 +44,6 @@ var initQuestionList = function(quesList) {
 	$('#old_protect_form .line:nth-child(1) .ques-text').text(quesList[0]);
 	$('#old_protect_form .line:nth-child(2) .ques-text').text(quesList[1]);
 	$('#old_protect_form .line:nth-child(3) .ques-text').text(quesList[2]);
-	console.log(quesList);
 };
 
 // 设置密保

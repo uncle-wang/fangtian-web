@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<title>密码保护</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	</head>
+	<body>
+		<div class="back-btn">
+			<a class="back-link" href="login.html">&lt;&nbsp;返回登录</a>
+		</div>
+		<div class="wrap" id="username">
+			<div class="sec-title">请输入您的用户名</div>
+			<form id="user_form" autocomplete="false">
+				<div class="line">
+					<div class="input-wrap"><input class="input" type="text" placeholder="要找回账号的用户名" name="username"></div>
+				</div>
+				<div class="submit-wrap"><input class="submit-btn" type="submit" value="下一步"></div>
+			</form>
+		</div>
+		<div class="wrap" id="protection">
+			<div class="sec-title">请输入密保问题的答案</div>
+			<form id="protect_form">
+				<div class="line">
+					<div class="label">问题1</div>
+					<div class="ques-text"></div>
+					<div class="label">答案1</div>
+					<div class="input-wrap"><input class="input" type="text" placeholder="原密保问题1的答案" name="answ_a"></div>
+				</div>
+				<div class="line">
+					<div class="label">问题2</div>
+					<div class="ques-text"></div>
+					<div class="label">答案2</div>
+					<div class="input-wrap"><input class="input" type="text" placeholder="原密保问题2的答案" name="answ_b"></div>
+				</div>
+				<div class="line">
+					<div class="label">问题3</div>
+					<div class="ques-text"></div>
+					<div class="label">答案3</div>
+					<div class="input-wrap"><input class="input" type="text" placeholder="原密保问题3的答案" name="answ_c"></div>
+				</div>
+				<input class="submit-btn" type="submit" value="下一步">
+			</form>
+		</div>
+		<div class="wrap" id="password">
+			<div class="sec-title">设置新密码</div>
+			<form id="password_form" autocomplete="false">
+				<div class="line">
+					<div class="label">请输入新密码</div>
+					<div class="input-wrap"><input class="input" type="password" placeholder="输入新密码" name="password"></div>
+				</div>
+				<div class="line">
+					<div class="label">请确认新密码</div>
+					<div class="input-wrap"><input class="input" type="password" placeholder="确认新密码" name="password2"></div>
+				</div>
+				<div class="submit-wrap"><input class="submit-btn" type="submit" value="确 定"></div>
+			</form>
+		</div>
+		<script type="text/javascript" src="../lib/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/reset.js"></script>
+	</body>
+</html>
