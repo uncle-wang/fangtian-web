@@ -114,6 +114,9 @@ $('#pickup_submit').click(function() {
 							else if (data.status === 2003) {
 								alert('余额不足，请刷新页面获取最新余额');
 							}
+							else if (data.status === 3004) {
+								alert('对不起，您今日的提现次数已达上限，请明天8:00(北京时间)之后再次尝试');
+							}
 							else {
 								alert('服务异常，请尝试刷新页面或重新登录');
 							}
