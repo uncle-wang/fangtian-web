@@ -1,4 +1,4 @@
-var percentPoint = 6;
+var percentPoint = 2;
 var userInfo;
 // 计算提现最大值
 var getMaxPickupValue = function() {
@@ -97,37 +97,40 @@ $('#pickup_submit').click(function() {
 				alert('提现数额不能小于100');
 			}
 			else {
-				if (quota + Math.ceil(quota * percentPoint / 100) > userInfo.balance) {
+				var fees = Math.ceil(quota * percentPoint / 100);
+				if (quota + fees > userInfo.balance) {
 					alert('余额不足，若您的余额有变动，可刷新页面获取最新余额');
 				}
 				else {
-					common.ajax({
-						url: '/api/pickup',
-						data: {
-							quota: quota
-						},
-						success: function(data) {
-							if (data.status === 1000) {
-								alert('提现成功，系统将在1个工作日内处理您的提现请求，您可以在提现记录中查看提现状态');
-								window.location.href = window.location.href;
+					if (confirm('提现金额:' + quota + '，手续费:' + fees + '豆，确认提现？')) {
+						common.ajax({
+							url: '/api/pickup',
+							data: {
+								quota: quota
+							},
+							success: function(data) {
+								if (data.status === 1000) {
+									alert('提现成功，系统将在1个工作日内处理您的提现请求，您可以在提现记录中查看提现状态');
+									window.location.href = window.location.href;
+								}
+								else if (data.status === 2003) {
+									alert('余额不足，请刷新页面获取最新余额');
+								}
+								else if (data.status === 3004) {
+									alert('对不起，您今日的提现次数已达上限，请明天8:00(北京时间)之后再次尝试');
+								}
+								else {
+									alert('服务异常，请尝试刷新页面或重新登录');
+								}
+							},
+							error: function() {
+								alert('请求失败，请检查您的网络');
+							},
+							complete: function() {
+								$('#pickup_wrap').hide();
 							}
-							else if (data.status === 2003) {
-								alert('余额不足，请刷新页面获取最新余额');
-							}
-							else if (data.status === 3004) {
-								alert('对不起，您今日的提现次数已达上限，请明天8:00(北京时间)之后再次尝试');
-							}
-							else {
-								alert('服务异常，请尝试刷新页面或重新登录');
-							}
-						},
-						error: function() {
-							alert('请求失败，请检查您的网络');
-						},
-						complete: function() {
-							$('#pickup_wrap').hide();
-						}
-					});
+						});
+					}
 				}
 			}
 		}
