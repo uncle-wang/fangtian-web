@@ -81,8 +81,14 @@ $('#recharge_btn').click(function() {
 });
 $('#pickup_btn').click(function() {
 	if (userInfo) {
-		$('#pickup_wrap').show();
-		$('#pickup_amount').val('').focus();
+		if (userInfo.alipay) {
+			$('#pickup_wrap').show();
+			$('#pickup_amount').val('').focus();
+		}
+		else {
+			alert('检测到您尚未绑定支付宝账号，请先完成支付宝绑定，我们将打款到绑定的支付宝账户，如果您已经完成绑定，请刷新页面后重试');
+
+		}
 	}
 	else {
 		toLoginPage();
@@ -128,6 +134,9 @@ $('#pickup_submit').click(function() {
 								}
 								else if (data.status === 3004) {
 									alert('对不起，您今日的提现次数已达上限，请明天8:00(北京时间)之后再次尝试');
+								}
+								else if (data.status === 6001) {
+									alert('检测到您尚未绑定支付宝账号，请先完成支付宝绑定再提现，我们将打款到您绑定的支付宝账户');
 								}
 								else {
 									alert('服务异常，请尝试刷新页面或重新登录');

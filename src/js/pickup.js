@@ -72,7 +72,10 @@ var initPickupData = function(pickupList) {
 		var $pickupItem = $('\
 			<li class="pickup-item">\
 				<div class="pickup-left">\
-					<div class="pickup-time">' + formatTime(pickupInfo.create_time) + '</div>\
+					<div class="pickup-row">\
+						<span class="pickup-time">' + formatTime(pickupInfo.create_time) + '</span>\
+						<span class="pickup-alipay">支付宝:' + pickupInfo.alipay + '</span>\
+					</div>\
 					<div class="pickup-row">\
 						<span class="pickup-amount">金额:' + pickupInfo.quota + '豆</span>\
 						<span class="pickup-fees">手续费:' + pickupInfo.fees + '豆</span>\

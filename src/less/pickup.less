@@ -19,13 +19,23 @@ body {
 	}
 }
 
-.pickup-time {
-	font-size: 13px;
-    color: #828282;
-}
-
 .pickup-row {
 	margin-top: 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+.pickup-time, .pickup-alipay {
+	font-size: 13px;
+	color: #828282;
+}
+
+.pickup-alipay {
+	margin-left: 4px;
 }
 
 .pickup-amount {
