@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title>支付宝账号</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="../css/alipay.css">
+	</head>
+	<body>
+		<div class="back-btn">
+			<a class="back-link" href="personal.html">&lt;&nbsp;返回个人中心</a>
+		</div>
+		<div class="wrap" id="protection">
+			<div class="sec-title">请输入密保问题的答案</div>
+			<form id="protect_form">
+				<div class="line">
+					<div class="label">问题1</div>
+					<div class="ques-text"></div>
+					<div class="label">答案1</div>
+					<div class="input-wrap"><input class="input" type="text" placeholder="原密保问题1的答案" name="answ_a"></div>
+				</div>
+				<div class="line">
+					<div class="label">问题2</div>
+					<div class="ques-text"></div>
+					<div class="label">答案2</div>
+					<div class="input-wrap"><input class="input" type="text" placeholder="原密保问题2的答案" name="answ_b"></div>
+				</div>
+				<div class="line">
+					<div class="label">问题3</div>
+					<div class="ques-text"></div>
+					<div class="label">答案3</div>
+					<div class="input-wrap"><input class="input" type="text" placeholder="原密保问题3的答案" name="answ_c"></div>
+				</div>
+				<input class="submit-btn" type="submit" value="下一步">
+			</form>
+		</div>
+		<div class="wrap" id="alipay">
+			<div class="sec-title">请输入要绑定的支付宝账号</div>
+			<form id="alipay_form" autocomplete="false">
+				<div class="line">
+					<div class="input-wrap"><input class="input" type="text" placeholder="请输入支付宝账号" name="alipay"></div>
+				</div>
+				<div class="submit-wrap"><input class="submit-btn" type="submit" value="确 定"></div>
+			</form>
+		</div>
+		<script type="text/javascript" src="../lib/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/alipay.js"></script>
+	</body>
+</html>

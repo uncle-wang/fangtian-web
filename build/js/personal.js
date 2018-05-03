@@ -39,13 +39,23 @@ common.ajax({
 			$('.signed').show();
 			var $protectLink = $('#protection_link');
 			var $protectTitle = $protectLink.find('.func-item-title');
+			var $alipayLink = $('#alipay_link');
+			var $alipayTitle = $alipayLink.find('.func-item-title');
 			if (userInfo.protection) {
 				$protectLink.attr('href', 'protection.html?type=1');
+				$alipayLink.attr('href', 'alipay.html?type=1');
 				$protectTitle.addClass('set');
 			}
 			else {
 				$protectLink.attr('href', 'protection.html?type=0');
 				$protectTitle.removeClass('set');
+				$alipayLink.attr('href', 'alipay.html?type=0');
+			}
+			if (userInfo.alipay) {
+				$alipayTitle.addClass('set');
+			}
+			else {
+				$alipayTitle.removeClass('set');
 			}
 		}
 	}
