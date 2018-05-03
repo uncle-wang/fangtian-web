@@ -15,6 +15,9 @@ common.ajax({
 		}
 	}
 });
+var toLoginPage = function() {
+	window.location.href = 'login.html?info=' + encodeURIComponent('请先登录');
+};
 var zeroFixed = function(n) {
 
 	if (Number(n) < 10) {
@@ -94,6 +97,9 @@ var orderSuccess = function(data) {
 		alert('投注成功，您可到个人中心-历史订单中查看订单状态');
 		window.location.href = window.location.href;
 	}
+	else if (status === 1001) {
+		alert('对不起，请先登录后再投注');
+	}
 	else if (status === 2003) {
 		alert('对不起，您的余额不足，请充值后重新下单');
 	}
@@ -107,18 +113,28 @@ var orderSuccess = function(data) {
 var bindBuyEvent = function() {
 
 	$('#amount_odd').click(function() {
-		common.orderbox.show({
-			type: 1,
-			gameId: gameInfo.id,
-			callback: orderSuccess
-		});
+		if (userInfo) {
+			common.orderbox.show({
+				type: 1,
+				gameId: gameInfo.id,
+				callback: orderSuccess
+			});
+		}
+		else {
+			toLoginPage();
+		}
 	});
 	$('#amount_even').click(function() {
-		common.orderbox.show({
-			type: 0,
-			gameId: gameInfo.id,
-			callback: orderSuccess
-		});
+		if (userInfo) {
+			common.orderbox.show({
+				type: 0,
+				gameId: gameInfo.id,
+				callback: orderSuccess
+			});
+		}
+		else {
+			toLoginPage();
+		}
 	});
 };
 // 获取游戏信息
@@ -140,7 +156,7 @@ $('#recharge').click(function() {
 		common.recharge.show();
 	}
 	else {
-		window.location.href = 'login.html?redirect=index.html';
+		toLoginPage();
 	}
 });
 
