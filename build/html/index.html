@@ -4,7 +4,7 @@
 		<title>首页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<link rel="stylesheet" type="text/css" href="../css/home.css">
+		<link rel="stylesheet" type="text/css" href="../css/home.css?v=1">
 	</head>
 	<body>
 		<header>
@@ -17,26 +17,22 @@
 		<div class="game-box-wrap">
 			<div class="game-box odd">
 				<div class="game-wrap">
-					<div class="type">单</div>
-					<div class="amount-wrap">
-						<div class="amount">0</div>
+					<div class="amount-wrap" id="amount_odd">
+						<div class="amount-info">[单]投注总额</div>
+						<div class="amount">0豆</div>
+						<a class="buy-btn">停止投注</a>
 					</div>
 					<div class="probability">赔率: 0</div>
-					<div class="buy-btn-wrap">
-						<a id="buy_odd" class="buy-btn">我要猜单</a>
-					</div>
 				</div>
 			</div>
 			<div class="game-box even">
 				<div class="game-wrap">
-					<div class="type">双</div>
-					<div class="amount-wrap">
-						<div class="amount">0</div>
+					<div class="amount-wrap" id="amount_even">
+						<div class="amount-info">[双]投注总额</div>
+						<div class="amount">0豆</div>
+						<a class="buy-btn">停止投注</a>
 					</div>
 					<div class="probability">赔率: 0</div>
-					<div class="buy-btn-wrap">
-						<a id="buy_even" class="buy-btn">我要猜双</a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -48,7 +44,36 @@
 			<a class="game-btn" id="recharge">我要充值</a>
 			<a class="game-btn" href="personal.html">个人中心</a>
 		</div>
-		<div class="history-wrap"><a class="history-link" href="games.html">往期结果</a></div>
+		<div class="history-wrap"><a class="history-link" href="games.html">查看往期</a></div>
+		<div class="info-wrap">
+			<h2 class="info-title">关于透明开奖</h2>
+			<p class="info-text">1.游戏开奖结果依据游戏期号当日上证指数[000001]指数的行情而定，网站及个人无法操纵该结果</p>
+			<p class="info-text">2.每期游戏系统将会采取游戏期号当日上证指数[000001]指数的收盘价格小数点后第1位数字的奇偶性作为开奖结果</p>
+			<p class="info-text">3.上证指数相关数据玩家可到各大权威机构查看并确认，本网站首选<a href="http://www.sse.com.cn/">上海证券交易所</a>公布的数据为参考依据</p>
+			<p class="info-text">举例说明</p>
+			<p class="info-text">如2018年5月3日的上证指数收盘价格为3100.86，8为双(偶)数，则在20180503期游戏中投注"双"的玩家获胜，投注"单"的玩家失败</p>
+			<p class="info-text">注意:</p>
+			<p class="info-text">各大网站展示的上证指数收盘价格通常只保留小数点后两位，采用四舍五入的原则，因此可能出现误差，如3123.996023会被展示为3124.00，本网站使用原数据作为判断依据，此例中取9为单数，而非取0</p>
+			<h2 class="info-title">基本玩法</h2>
+			<p class="info-text">1.游戏方式为猜单双(奇偶)，玩家可在每期游戏接受投注的时间段内参与投注"单"或者"双"，玩家可以选择投注不同数额的游戏豆</p>
+			<p class="info-text">2.游戏豆可以通过充值获取，1元(人民币)=1游戏豆，目前支持的充值方式为支付宝付款</p>
+			<p class="info-text">3.游戏豆可提现，1游戏豆=1元(人民币)，提现将收取2%的手续费，详细收费规则可到个人中心-提现中查看</p>
+			<h2 class="info-title">赔率的计算方式</h2>
+			<p class="info-text">1.游戏的赔率根据当期游戏投注"单"的订单总额和投注"双"的订单总额计算产生</p>
+			<p class="info-text">2.如在某期游戏中，投注"单"的游戏豆总额为1000，投注"双"的游戏豆总额为2000，则奖池有效金额为(1000+2000)*0.9=2700，其中0.9为固定比例，则"单"的赔率为2700/1000=2.7，"双"的赔率为2700/2000=1.35</p>
+			<p class="info-text">3.在上例中，假设玩家A在该期投注100游戏豆在"单"上且该期的开奖结果为奇数，则玩家A在开奖后将会赢得270游戏豆，扣除投注的100游戏豆，该玩家本次投注共赢取170游戏豆</p>
+			<p class="info-text">4.赔率精确到小数点后2位，采用全舍法，如2.6864将按照2.68计算</p>
+			<h2 class="info-title">关于游戏时间</h2>
+			<p class="info-text">1.通常情况下每期游戏从前1日17:00(北京时间,下同)开始接收投注，截止到上证收盘当日14:30停止接收投注</p>
+			<p class="info-text">2.上证指数[000001]市场每日15:00收盘，本站系统将在15:30前完成赔率计算、发放奖励、公布开奖结果等，玩家可在15:30系统公布开奖结果前去其他权威机构查询数据，提前确认结果</p>
+			<p class="info-text">3.由于上证市场在双休日、法定节假日等时间暂停交易，本网站的游戏进度将与其保持一致，但系统会提前开放下一期游戏，在此期间玩家可以正常投注，届时该期游戏接收投注的时间将会被拉长</p>
+			<p class="info-text">4.如遇意外情况导致上证市场临时变更交易时间，本站将在不改变已开奖结果的前提下随时调整游戏进度</p>
+			<h2 class="info-title">祝您游戏愉快</h2>
+			<p class="info-text">1.请您保护好账号信息，避免账号被盗用给您造成损失</p>
+			<p class="info-text">2.请您合理控制投注金额，避免游戏对您的日常生活造成影响</p>
+			<p class="info-text">3.本站依据第三方权威机构生成开奖结果，不存在"操纵"的情况，请您放心投注</p>
+			<p class="info-text">4.游戏中遇到任何问题，请到个人中心-问题反馈与我们联系</p>
+		</div>
 		<script type="text/javascript" src="../lib/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/common.js"></script>
 		<script type="text/javascript" src="../js/home.js"></script>

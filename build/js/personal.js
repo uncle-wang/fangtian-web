@@ -118,7 +118,7 @@ $('#pickup_submit').click(function() {
 					alert('余额不足，若您的余额有变动，可刷新页面获取最新余额');
 				}
 				else {
-					if (confirm('提现金额:' + quota + '，手续费:' + fees + '豆，确认提现？')) {
+					if (confirm('提现金额:' + quota + '，手续费:' + fees + '豆，收款支付宝账号:' + userInfo.alipay + '，确认提现？')) {
 						common.ajax({
 							url: '/api/pickup',
 							data: {

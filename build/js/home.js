@@ -33,6 +33,7 @@ var formatTime = function(stamp) {
 var initGameInfo = function() {
 
 	$('header .game-num').text(gameInfo.id + '期');
+	var buyBtn = $('.buy-btn');
 	var oddBox = $('.game-box.odd');
 	var evenBox = $('.game-box.even');
 	var status = gameInfo.status;
@@ -75,11 +76,13 @@ var initGameInfo = function() {
 	}
 	// 接受下注
 	else if (status === '0') {
+		bindBuyEvent();
+		buyBtn.text('点击投注').addClass('high');
 		$('.buy-btn-wrap').show();
 		$('#disable_time').show().text('投注时间截止至' + formatTime(gameInfo.disable_time));
 	}
-	oddBox.find('.amount').text(odd);
-	evenBox.find('.amount').text(even);
+	oddBox.find('.amount').text(odd + '豆');
+	evenBox.find('.amount').text(even + '豆');
 	oddBox.find('.probability').text('赔率: ' + pOdd);
 	evenBox.find('.probability').text('赔率: ' + pEven);
 };
@@ -100,6 +103,23 @@ var orderSuccess = function(data) {
 	else {
 		alert('对不起，数据异常，请您稍后重试');
 	}
+};
+var bindBuyEvent = function() {
+
+	$('#amount_odd').click(function() {
+		common.orderbox.show({
+			type: 1,
+			gameId: gameInfo.id,
+			callback: orderSuccess
+		});
+	});
+	$('#amount_even').click(function() {
+		common.orderbox.show({
+			type: 0,
+			gameId: gameInfo.id,
+			callback: orderSuccess
+		});
+	});
 };
 // 获取游戏信息
 common.ajax({
@@ -122,20 +142,6 @@ $('#recharge').click(function() {
 	else {
 		window.location.href = 'login.html?redirect=index.html';
 	}
-});
-$('#buy_odd').click(function() {
-	common.orderbox.show({
-		type: 1,
-		gameId: gameInfo.id,
-		callback: orderSuccess
-	});
-});
-$('#buy_even').click(function() {
-	common.orderbox.show({
-		type: 0,
-		gameId: gameInfo.id,
-		callback: orderSuccess
-	});
 });
 
 common.recharge.init();

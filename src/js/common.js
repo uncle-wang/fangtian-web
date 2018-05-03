@@ -89,15 +89,16 @@
 		var rechargeDom = $('\
 			<div id="recharge_box" class="layer">\
 				<div class="quota-box">\
+					<div class="quota-title">请选择充值金额</div>\
 					<div class="quota-list">\
-						<a class="quota-item" value="1.00">100豆</a>\
-						<a class="quota-item" value="3.00">300豆</a>\
-						<a class="quota-item" value="10.00">1000豆</a>\
-						<a class="quota-item" value="20.00">2000豆</a>\
-						<a class="quota-item" value="50.00">5000豆</a>\
-						<a class="quota-item" value="100.00">10000豆</a>\
-						<a class="quota-item" value="200.00">20000豆</a>\
-						<a class="quota-item" value="500.00">50000豆</a>\
+						<a class="quota-item" value="100.00">100豆</a>\
+						<a class="quota-item" value="200.00">200豆</a>\
+						<a class="quota-item" value="500.00">500豆</a>\
+						<a class="quota-item" value="1000.00">1000豆</a>\
+						<a class="quota-item" value="2000.00">2000豆</a>\
+						<a class="quota-item" value="5000.00">5000豆</a>\
+						<a class="quota-item" value="10000.00">10000豆</a>\
+						<a class="quota-item" value="20000.00">20000豆</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="recharge_confirm" class="quota-btn">确定</a>\
@@ -236,22 +237,23 @@
 
 	// 下单
 	var orderbox = (function() {
+		var prodname = ['双', '单'];
 		var orderboxData = {};
-		var orderboxConfirm, orderboxCancel;
+		var orderboxConfirm, orderboxCancel, orderType;
 		var orderboxDom = $('\
 			<div id="orderbox_box" class="layer">\
 				<div class="quota-box">\
+					<div class="quota-title">您将投注<span id="order_type"></span>，请选择金额</div>\
 					<div class="quota-list">\
 						<!--a class="quota-item" value="50">50豆</a-->\
-						<a class="quota-item" value="100">100豆</a>\
-						<a class="quota-item" value="200">200豆</a>\
-						<a class="quota-item" value="500">500豆</a>\
-						<a class="quota-item" value="1000">1000豆</a>\
-						<a class="quota-item" value="2000">2000豆</a>\
-						<a class="quota-item" value="5000">5000豆</a>\
-						<a class="quota-item" value="10000">10000豆</a>\
-						<a class="quota-item" value="20000">20000豆</a>\
-						<a class="quota-item" value="50000">50000豆</a>\
+						<a class="quota-item" value="100.00">100豆</a>\
+						<a class="quota-item" value="200.00">200豆</a>\
+						<a class="quota-item" value="500.00">500豆</a>\
+						<a class="quota-item" value="1000.00">1000豆</a>\
+						<a class="quota-item" value="2000.00">2000豆</a>\
+						<a class="quota-item" value="5000.00">5000豆</a>\
+						<a class="quota-item" value="10000.00">10000豆</a>\
+						<a class="quota-item" value="20000.00">20000豆</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="orderbox_confirm" class="quota-btn">确定</a>\
@@ -265,6 +267,7 @@
 			orderboxData.type = options.type;
 			orderboxData.gameId = options.gameId;
 			orderboxData.callback = options.callback;
+			orderType.text('[' + prodname[options.type] + ']');
 		};
 		var hide = function() {
 			orderboxDom.hide();
@@ -277,6 +280,7 @@
 				body.append(orderboxDom);
 				orderboxConfirm = $('#orderbox_confirm');
 				orderboxCancel = $('#orderbox_cancel');
+				orderType = $('#order_type');
 				orderboxDom.click(function() {
 					hide();
 				});
@@ -284,18 +288,21 @@
 					hide();
 				});
 				orderboxConfirm.click(function() {
-					if (orderboxData.value) {
-						ajax({
-							url: '/api/createOrder',
-							data: {
-								type: orderboxData.type,
-								gameId: orderboxData.gameId,
-								quota: orderboxData.value
-							},
-							success: function(data) {
-								orderboxData.callback && orderboxData.callback(data);
-							}
-						});
+					var orderValue = orderboxData.value;
+					if (orderValue) {
+						if (confirm('投注种类:' + prodname[orderboxData.type] + '，金额:' + orderValue + '，请确认')) {
+							ajax({
+								url: '/api/createOrder',
+								data: {
+									type: orderboxData.type,
+									gameId: orderboxData.gameId,
+									quota: orderValue
+								},
+								success: function(data) {
+									orderboxData.callback && orderboxData.callback(data);
+								}
+							});
+						}
 					}
 				});
 				orderboxDom.find('.quota-item').click(function() {
