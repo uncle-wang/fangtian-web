@@ -33,24 +33,11 @@ common.ajax({
 		if (data.status === 1000) {
 			userInfo = data.userInfo;
 			$('.my-info-icon.signed').text(userInfo.nick);
-			$('.my-info-name.signed').text(userInfo.name);
+			$('.my-info-name.signed').text(userInfo.tel);
 			$('#balance_text').text('余豆: ' + userInfo.balance);
 			$('.unsigned').hide();
 			$('.signed').show();
-			var $protectLink = $('#protection_link');
-			var $protectTitle = $protectLink.find('.func-item-title');
-			var $alipayLink = $('#alipay_link');
-			var $alipayTitle = $alipayLink.find('.func-item-title');
-			if (userInfo.protection) {
-				$protectLink.attr('href', 'protection.html?type=1');
-				$alipayLink.attr('href', 'alipay.html?type=1');
-				$protectTitle.addClass('set');
-			}
-			else {
-				$protectLink.attr('href', 'protection.html?type=0');
-				$protectTitle.removeClass('set');
-				$alipayLink.attr('href', 'alipay.html?type=0');
-			}
+			var $alipayTitle = $('#alipay_link .func-item-title');
 			if (userInfo.alipay) {
 				$alipayTitle.addClass('set');
 			}
@@ -86,8 +73,8 @@ $('#pickup_btn').click(function() {
 			$('#pickup_amount').val('').focus();
 		}
 		else {
-			alert('检测到您尚未绑定支付宝账号，请先完成支付宝绑定，我们将打款到绑定的支付宝账户，如果您已经完成绑定，请刷新页面后重试');
-
+			alert('检测到您尚未绑定支付宝账号，请先完成支付宝绑定');
+			window.location.href = 'alipay.html';
 		}
 	}
 	else {

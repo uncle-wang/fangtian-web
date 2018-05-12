@@ -13,7 +13,6 @@
 .wrap {
 	padding: 0 16px;
 	overflow: hidden;
-	display: none;
 }
 
 .sec-title {
@@ -35,28 +34,40 @@ form {
 	margin-top: 8px;
 }
 
-.ques-text {
-	font-size: 14px;
-	margin-top: 6px;
-	color: #ff5722;
-}
-
 .input-wrap {
 	border: 1px solid #009688;
-	margin-top: 6px;
+	margin-top: 18px;
 	border-radius: 3px;
 	overflow: hidden;
 	padding: 0 12px;
+	&.pend {
+		padding-right: 90px;
+		position: relative;
+	}
 }
 
 .input {
-	height: 28px;
+	height: 32px;
 	display: block;
 	width: 100%;
 	border: none;
 	outline: none;
-	color: #009688;
+	color: #757575;
 	font-size: 14px;
+}
+
+.code-wrap {
+	right: 2px;
+	position: absolute;
+	top: 4px;
+	font-size: 14px;
+	padding: 2px 0;
+	color: #009688;
+	width: 78px;
+	text-align: center;
+}
+.code-counter {
+	display: none;
 }
 
 .submit-btn {

@@ -26,14 +26,14 @@ var getParam = function(name) {
 };
 // 登录
 $('#login_form').submit(function() {
-	var username = $('input[name="username"]').val();
+	var tel = $('input[name="tel"]').val();
 	var password = $('input[name="password"]').val();
 	hideError();
-	if (username && password) {
+	if (tel && password) {
 		$.ajax({
 			url: '/api/sign',
 			data: {
-				username: username,
+				tel: tel,
 				password: password
 			},
 			success: function(data) {

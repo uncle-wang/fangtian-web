@@ -22,6 +22,10 @@ body {
 	margin-top: 48px;
 	border-bottom: 1px solid #009688;
 	padding: 0 5px 8px;
+	&.pend {
+		padding-right: 90px;
+		position: relative;
+	}
 	input {
 		width: 100%;
 		display: block;
@@ -33,6 +37,20 @@ body {
 			color: #b1b1b1;
 		}
 	}
+}
+.code-wrap {
+	right: 0;
+	position: absolute;
+	top: -7px;
+	font-size: 14px;
+	padding: 2px 0;
+	border: 1px solid #009688;
+	color: #009688;
+	width: 78px;
+	text-align: center;
+}
+.code-counter {
+	display: none;
 }
 .submit-wrap {
 	margin-top: 32px;

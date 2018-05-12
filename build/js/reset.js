@@ -1,52 +1,19 @@
-// 获取密保问题
-var getQuestions = function(username, callback) {
+// 手机号正则验证
+var telReg = /^1\d{10}$/;
 
-	common.ajax({
-		url: '/api/getQuestionsByName',
-		data: {username: username},
-		success: function(data) {
-			if (data.status === 1000) {
-				if (data.ques) {
-					callback(data.ques);
-				}
-				else {
-					alert('对不起，该账号暂未设置密码保护，无法重置密码');
-				}
-			}
-			else if (data.status === 2002) {
-				alert('用户名不存在，请检查您的输入');
-			}
-			else {
-				alert('数据异常，请稍后重试');
-			}
-		}
-	});
-};
-
-// 初始化问题列表
-var initQuestionList = function(quesList) {
-
-	$('#protect_form .line:nth-child(1) .ques-text').text(quesList[0]);
-	$('#protect_form .line:nth-child(2) .ques-text').text(quesList[1]);
-	$('#protect_form .line:nth-child(3) .ques-text').text(quesList[2]);
-};
-
-// 重置密码
 var _getValue = function(name) {
 
 	return $('input[name="' + name + '"]').val();
 };
-var resetPassword = function() {
+var resetPassword = function(tel, code, password) {
 
 	common.ajax({
 
 		url: '/api/resetPassword',
 		data: {
-			username: _getValue('username'),
-			answ_a: _getValue('answ_a'),
-			answ_b: _getValue('answ_b'),
-			answ_c: _getValue('answ_c'),
-			password: _getValue('password')
+			tel: tel,
+			code: code,
+			password: password
 		},
 		success: function(data) {
 
@@ -55,10 +22,11 @@ var resetPassword = function() {
 				alert('密码重置成功');
 				window.location.href = 'login.html';
 			}
-			else if (status === 2006) {
-				alert('密保问题验证失败，请检查您的答案');
-				$('#password').hide();
-				$('#protection').show();
+			else if (status === 2002) {
+				alert('账号不存在，请检查您的手机号');
+			}
+			else if (status === 8001) {
+				alert('验证码无效');
 			}
 			else {
 				alert('对不起，数据异常，请稍后重试');
@@ -67,62 +35,74 @@ var resetPassword = function() {
 	});
 };
 
-// 检验protection表单内容是否合法
-var protValid = function() {
+// 倒计时
+var codeCount = function() {
 
-	var inputs = $('#protection input[type="text"]');
-	for (var i = 0; i < inputs.length; i ++) {
-		var text = $(inputs[i]).val();
-		if (text.length <= 0) {
-			return 0;
-		}
-		if (text.length > 16) {
-			return 2;
-		}
-	}
-	return 1;
-};
-
-$('#protect_form').submit(function() {
-
-	var validStatus = protValid();
-	if (validStatus === 1) {
-		$('#protection').hide();
-		$('#password').show();
-	}
-	else if (validStatus === 2) {
-		alert('选项内容不能超过16个字符，请检查您的输入');
-	}
-	else {
-		alert('选项不能为空');
-	}
-	return false;
-});
-$('#user_form').submit(function() {
-
-	var userName = $(this).find('input[name="username"]').val();
-	if (userName) {
-		getQuestions(userName, function(quesList) {
-			initQuestionList(quesList);
-			$('#username').hide();
-			$('#protection').show();
-		});
-	}
-	else {
-		alert('请输入用户名');
-	}
-	return false;
-});
-$('#password_form').submit(function() {
-
-	var password = $('#password').find('input[name="password"]').val();
-	var password2 = $('#password').find('input[name="password2"]').val();
-	if (password && password2) {
-		if (password === password2) {
-			resetPassword();
+	var s = 60;
+	var t = setInterval(function() {
+		s --;
+		if (s <= 0) {
+			clearInterval(t);
+			$('.code-counter').hide();
+			$('.code-btn').show();
 		}
 		else {
-			alert('两次输入不一致，请检查您的输入');
+			$('.code-counter').text(s + '秒');
+		}
+	}, 1000);
+};
+
+// 发送验证码
+var sendCode = function() {
+	var tel = _getValue('tel');
+	if (!telReg.test(tel)) {
+		alert('请填写正确的手机号码');
+		return;
+	}
+	common.ajax({
+		url: '/api/sendResetCode',
+		data: {tel: tel},
+		success: function(data) {
+			if (data.status === 1000) {
+				$('.code-btn').hide();
+				$('.code-counter').text('60秒').show();
+				codeCount();
+			}
+			else if (data.status === 2002) {
+				alert('账号不存在，请检查您的手机号');
+			}
+			else if (data.status === 8002) {
+				alert('请求过于频繁，请1分钟后重试');
+			}
+			else {
+				alert('服务异常，请稍后重试');
+			}
+		}
+	});
+};
+
+// 验证码
+$('#code_btn').click(function() {
+	sendCode();
+});
+
+$('#reset_form').submit(function() {
+
+	var tel = _getValue('tel');
+	var code = _getValue('code');
+	var password = _getValue('password');
+	var password2 = _getValue('password2');
+	if (tel && code && password && password2) {
+		if (password !== password2) {
+			alert('两次密码不一致');
+		}
+		else {
+			if (!telReg.test(tel)) {
+				alert('手机号码无效');
+			}
+			else {
+				resetPassword(tel, code, password);
+			}
 		}
 	}
 	else {
