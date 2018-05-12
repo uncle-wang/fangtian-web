@@ -57,6 +57,9 @@ $(document).ready(function() {
 					$('.code-counter').text('60秒').show();
 					codeCount();
 				}
+				else if (data.status === 2001) {
+					showError('该手机号已被注册');
+				}
 				else if (data.status === 8002) {
 					showError('请求过于频繁，请1分钟后重试');
 				}
