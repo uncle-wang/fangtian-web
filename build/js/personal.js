@@ -37,12 +37,11 @@ common.ajax({
 			$('#balance_text').text('余豆: ' + userInfo.balance);
 			$('.unsigned').hide();
 			$('.signed').show();
-			var $alipayTitle = $('#alipay_link .func-item-title');
+			var $alipayText = $('#alipay_link .func-item-text');
 			if (userInfo.alipay) {
-				$alipayTitle.addClass('set');
-			}
-			else {
-				$alipayTitle.removeClass('set');
+				$('#alipay_link .func-item-text').hide();
+				$('#alipay_link .func-item-text.top').show();
+				$('#alipay_link .func-item-des').text(userInfo.alipay).show();
 			}
 		}
 	}

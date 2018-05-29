@@ -107,16 +107,26 @@ body {
 	line-height: 58px;
 	position: relative;
 }
-#alipay_link .func-item-title:after {
-	content: '未绑定，点击设置';
+.func-item-text {
+	top: 20px;
+	line-height: normal;
 	position: absolute;
 	font-size: 12px;
 	color: red;
 	right: 0;
+	&.top {
+		top: 12px;
+		display: none;
+		color: #009688;
+	}
 }
-#alipay_link .func-item-title.set:after {
-	content: '已绑定，点击更换';
-	color: #009688;
+.func-item-des {
+	display: none;
+	font-size: 12px;
+	color: #a2a2a2;
+	position: absolute;
+	right: 0;
+	top: 10px;
 }
 
 .logout-wrap {
