@@ -72,7 +72,7 @@ $('#pickup_btn').click(function() {
 			$('#pickup_amount').val('').focus();
 		}
 		else {
-			alert('检测到您尚未绑定支付宝账号，请先完成支付宝绑定');
+			alert('请您先设置用于收款的支付宝账号，避免账号被盗用后对方将您的游戏豆提现到其他支付宝账号');
 			window.location.href = 'alipay.html';
 		}
 	}

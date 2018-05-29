@@ -85,8 +85,8 @@ var initGameInfo = function() {
 	}
 	oddBox.find('.amount').text(odd + '豆');
 	evenBox.find('.amount').text(even + '豆');
-	oddBox.find('.probability').text('赔率: ' + pOdd);
-	evenBox.find('.probability').text('赔率: ' + pEven);
+	oddBox.find('.probability').text('当前赔率: ' + pOdd);
+	evenBox.find('.probability').text('当前赔率: ' + pEven);
 };
 var orderSuccess = function(data) {
 
