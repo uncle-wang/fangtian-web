@@ -79,10 +79,9 @@ $(document).ready(function() {
 		var tel = $('input[name="tel"]').val();
 		var code = $('input[name="code"]').val();
 		var password = $('input[name="password"]').val();
-		var nickname = $('input[name="nickname"]').val();
 		var password2 = $('input[name="password2"]').val();
 		hideError();
-		if (tel && code && password && password2 && nickname) {
+		if (tel && code && password && password2) {
 			if (!telReg.test(tel)) {
 				showError('手机号码无效');
 			}
@@ -96,8 +95,7 @@ $(document).ready(function() {
 						data: {
 							tel: tel,
 							code: code,
-							password: password,
-							nickname: nickname
+							password: password
 						},
 						success: function(data) {
 							if (data.status === 1000) {
@@ -106,7 +104,7 @@ $(document).ready(function() {
 								turnToPage('login.html?info=' + encodeURIComponent(newUserInfo));
 							}
 							else if (data.status === 2001) {
-								showError('用户名已存在');
+								showError('该手机号已被注册');
 							}
 							else if (data.status === 8001) {
 								showError('验证码无效');

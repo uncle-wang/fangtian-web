@@ -32,7 +32,7 @@ common.ajax({
 	success: function(data) {
 		if (data.status === 1000) {
 			userInfo = data.userInfo;
-			$('.my-info-icon.signed').text(userInfo.nick);
+			$('.my-info-icon.signed').text(userInfo.tel.substr(7));
 			$('.my-info-name.signed').text(userInfo.tel);
 			$('#balance_text').text('余豆: ' + userInfo.balance);
 			$('.unsigned').hide();

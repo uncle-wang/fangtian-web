@@ -2,7 +2,6 @@ var gameInfo, userInfo;
 var updateUserInfo = function() {
 	if (userInfo) {
 		$('#login_btn').hide();
-		$('#user_name').text(userInfo.nick).css('display', 'block');
 	}
 };
 // 获取用户信息
