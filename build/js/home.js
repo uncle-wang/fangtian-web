@@ -50,15 +50,15 @@ var initGameInfo = function() {
 	}
 	else if (odd === 0) {
 		pOdd = 0;
-		pEven = '1.00';
+		pEven = '1.000';
 	}
 	else if (even === 0) {
-		pOdd = '1.00';
+		pOdd = '1.000';
 		pEven = 0;
 	}
 	else {
-		pOdd = (Math.floor(100 * total / odd) / 100).toFixed(2);
-		pEven = (Math.floor(100 * total / even) / 100).toFixed(2);
+		pOdd = (Math.floor(1000 * total / odd) / 1000).toFixed(3);
+		pEven = (Math.floor(1000 * total / even) / 1000).toFixed(3);
 	}
 	// 已开奖
 	if (status === '1') {
@@ -67,7 +67,7 @@ var initGameInfo = function() {
 			resultInfo = '当期游戏结束，因为存在单项投注总额为0的情况，所有玩家的投注金额将全部返回';
 		}
 		else {
-			resultInfo = '当期游戏结束，开奖结果为' + gameInfo.result_no + '，投注' + (result === 0 ? '双' : '单') + '号的玩家获胜，当期赔率:' + gameInfo.times.toFixed(2);
+			resultInfo = '当期游戏结束，开奖结果为' + gameInfo.result_no + '，投注' + (result === 0 ? '双' : '单') + '号的玩家获胜，当期赔率:' + gameInfo.times.toFixed(3);
 		}
 		$('#result').show().text(resultInfo);
 		$('#next_time').show();

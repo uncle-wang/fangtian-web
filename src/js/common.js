@@ -91,14 +91,14 @@
 				<div class="quota-box">\
 					<div class="quota-title">请选择充值金额</div>\
 					<div class="quota-list">\
+						<a class="quota-item" value="10.00">10豆</a>\
+						<a class="quota-item" value="30.00">30豆</a>\
 						<a class="quota-item" value="100.00">100豆</a>\
-						<a class="quota-item" value="200.00">200豆</a>\
-						<a class="quota-item" value="500.00">500豆</a>\
+						<a class="quota-item" value="300.00">300豆</a>\
 						<a class="quota-item" value="1000.00">1000豆</a>\
 						<a class="quota-item" value="2000.00">2000豆</a>\
 						<a class="quota-item" value="5000.00">5000豆</a>\
 						<a class="quota-item" value="10000.00">10000豆</a>\
-						<a class="quota-item" value="20000.00">20000豆</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="recharge_confirm" class="quota-btn">确定</a>\
@@ -245,15 +245,14 @@
 				<div class="quota-box">\
 					<div class="quota-title">您将投注<span id="order_type"></span>，请选择金额</div>\
 					<div class="quota-list">\
-						<!--a class="quota-item" value="50">50豆</a-->\
+						<a class="quota-item" value="10.00">10豆</a>\
+						<a class="quota-item" value="30.00">30豆</a>\
 						<a class="quota-item" value="100.00">100豆</a>\
-						<a class="quota-item" value="200.00">200豆</a>\
-						<a class="quota-item" value="500.00">500豆</a>\
+						<a class="quota-item" value="300.00">300豆</a>\
 						<a class="quota-item" value="1000.00">1000豆</a>\
 						<a class="quota-item" value="2000.00">2000豆</a>\
 						<a class="quota-item" value="5000.00">5000豆</a>\
 						<a class="quota-item" value="10000.00">10000豆</a>\
-						<a class="quota-item" value="20000.00">20000豆</a>\
 					</div>\
 					<div class="quota-fun">\
 						<a id="orderbox_confirm" class="quota-btn">确定</a>\
